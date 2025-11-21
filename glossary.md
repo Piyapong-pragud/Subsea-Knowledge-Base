@@ -1,176 +1,278 @@
 # Glossary
-รวมศัพท์ 60 คำสำคัญในโลก Submarine Cable
+รวมศัพท์ 100 คำสำคัญในโลก Submarine Cable
 
-🔹 A – C
+#️⃣ A – C
 
-🔹Armored Cable
+ACR (Attenuation to Crosstalk Ratio)
 
-สายใต้น้ำที่มีเกราะเหล็ก เพื่อกันลากอวน/สมอเรือ
-ใช้ตรงไหน: ใกล้ฝั่ง, fishing zone
+ค่าบอกความต่างระหว่างสัญญาณหลักและสัญญาณรบกวน (crosstalk)
+ใช้ในระบบ DWDM เพื่อวิเคราะห์คุณภาพช่อง
 
-🔹ASE Noise (Amplified Spontaneous Emission)
+AIS (Alarm Indication Signal)
 
-สัญญาณรบกวนจาก EDFA ใต้น้ำ ทำให้ OSNR ต่ำลง
-ผลกระทบ: คุณภาพช่องตกเร็วเมื่อ span ยาวหลายร้อยกิโล
+สัญญาณแจ้งเตือนลิงก์ผิดปกติ เช่น AIS-L, AIS-P
 
-🔹BMH (Beach Manhole)
+Amplifier Chain
 
-จุดที่สายใต้น้ำขึ้นฝั่ง
-งานจริง: จุดทดสอบ OTDR ก่อนเข้า CLS
+ชุด repeater ที่ต่อกันในสายใต้น้ำตั้งแต่ CLS → BU → Repeater
 
-🔹BU (Branching Unit)
+APC (Automatic Power Control)
 
-กล่องแยกสาขาใต้น้ำ แยก traffic ไปหลายประเทศ/หลายเกาะ
-APG: มี BU หลายจุด เช่น เวียดนาม
-CSN: ใช้แยกสายไปเกาะ
+ระบบควบคุมกำลังแสงของ repeater ให้คงที่
 
-🔹Capacity Planning
+Armored Cable
 
-การวางแผนเพิ่มช่อง เช่น 100G → 200G → 400G
-ต้องคำนวณ OSNR, nonlinear limit
+สายใยแก้วนำแสงแบบมีเกราะเหล็ก
+ใช้ในเขต near-shore / fishing zone
 
-🔹 C – G
+ASE Noise (Amplified Spontaneous Emission)
 
-🔹CD (Chromatic Dispersion)
+Noise จาก EDFA ใต้น้ำที่สะสมบน chain
+ทำให้ OSNR ตกลงเรื่อย ๆ
 
-การกระจายตัวของแสง ทำให้สัญญาณเบลอ
-APG/CSN: Coherent แก้ด้วย DSP ไม่ต้องใช้ DCM
+Back Reflection
 
-🔹CLS (Cable Landing Station)
+แสงสะท้อนกลับเข้า Tx หรือ Rx
+เกี่ยวข้องกับ ORL
 
-สถานีที่สายใต้น้ำมาสิ้นสุด
-มี: PFE, SLTE, NOC, ระบบไฟฟ้า
+BMH (Beach Manhole)
 
-🔹Coherent Transmission
+จุดขึ้นฝั่งของสาย ใช้ตรวจ OTDR ก่อนเข้าสู่ทางบก
 
-วิธีส่งสัญญาณแบบใหม่ ใช้ QPSK/8QAM/16QAM
-APG: 100G/200G coherent
-ข้อดี: เดินทางไกล มี FEC ดีมาก
+BU (Branching Unit)
 
-🔹EDFA (Repeater ใต้น้ำ)
+อุปกรณ์แยกเส้นทางใต้น้ำ
 
-แอมป์ขยายแสง ใช้ pump laser
-Gain: 14–20 dB ต่อ span
-อายุ: 25–30 ปี
+APG มี BU หลายจุด
 
-🔹Equalization (Gain Flatness)
+CSN ใช้แยกสาขาไปเกาะต่าง ๆ
 
-ทำให้กำลังทุกช่องเท่ากัน
-อุปกรณ์: WSS / GFF
+Capacity Planning
 
-🔹 F – L
+การวางแผนอัปเกรดช่อง เช่น 100G → 200G → 400G
 
-🔹FEC (Forward Error Correction)
+CD (Chromatic Dispersion)
 
-ช่วยลดข้อผิดพลาดบนลิงก์
+การกระจายสัญญาณตามความยาวคลื่น
+Coherent ใช้ DSP แก้ได้
+
+CDS (Chromatic Dispersion Slope)
+
+อัตราการเปลี่ยนแปลงของ CD ตาม wavelength
+
+CLS (Cable Landing Station)
+
+สถานี landing มี SLTE, PFE, NOC, AC/DC plant
+
+Coherent Transmission
+
+การส่งสัญญาณโดยใช้ QPSK/8QAM/16QAM
+คุณภาพดี ระยะไกล OSNR ต่ำก็รอด
+
+Conductivity Fault
+
+กรณี conductor มีการนำไฟฟ้าผิดปกติ เช่นน้ำเข้า → Ground fault
+
+#️⃣ D – G
+
+Dispersion Compensation
+
+การชดเชย CD (ระบบเก่าใช้ DCM, ระบบใหม่ใช้ DSP)
+
+Equalization (Gain Flatness)
+
+ปรับกำลัง channel ให้เรียบ
+ใช้อุปกรณ์ GFF/WSS/ROADM
+
+EDFA (Erbium-Doped Fiber Amplifier)
+
+Repeater ใต้น้ำ
+
+Gain 14–20 dB
+
+อายุ 25–30 ปี
+
+Fiber Attenuation
+
+ค่า loss ของ fiber
+ทั่วไป 0.17–0.18 dB/km
+
+Flex-grid
+
+ระบบช่องแบบยืดหยุ่น 12.5 GHz slot
+รองรับ superchannel
+
+FEC (Forward Error Correction)
+
+เพิ่มความทนต่อ BER
+
 APG: SD-FEC
-10G รุ่นเก่า: RS(255,239)
 
-🔹Fiber Attenuation
+10G: RS(255,239)
 
-ค่าลดทอนของไฟเบอร์
-ทั่วไป: 0.17–0.18 dB/km
+GSNR (Generalized SNR)
 
-🔹Flex-Grid
+ตัวชี้วัดสัญญาณเมื่อคิด nonlinear ด้วย
+QPSK ต้อง ≥ 11 dB
 
-ระบบปรับช่องแบบยืดหยุ่น 12.5 GHz
-APG: ใช้กับ coherent
+GFF (Gain Flattening Filter)
 
-🔹GSNR
+ฟิลเตอร์ปรับ power profile ให้เรียบก่อน/หลัง ROADM
 
-ตัววัดคุณภาพสัญญาณแบบนับ nonlinear ด้วย
-QPSK: ต้อง >11 dB
+Ground Path Return
 
-🔹Landing Station Power System
+การคืนกระแสของ PFE ผ่านน้ำทะเล (Single-End Feed)
 
-ระบบไฟฟ้า CLS
+#️⃣ H – N
 
-🔹UPS
+High-Voltage Bypass Switch
 
-AC/DC plant
+วงจรใน BU/Repeater สำหรับ bypass ส่วนที่เสีย
 
-🔹PFE
+IR Test (Insulation Resistance)
 
-🔹 M – P
+ทดสอบฉนวนว่า conductor leak หรือไม่
+ค่า IR ต่ำ → เสี่ยง ground fault
 
-🔹Marine Repair
+Joint (Undersea Joint)
 
-การซ่อมสายในทะเล
-ขั้นตอน: ROV → Cut → Recovery → Splice → Relay
+จุด splice ใต้น้ำหลังตัดซ่อม
 
-🔹OTDR (Optical Time Domain Reflectometer)
+Line Coherent Detection
 
-เครื่องยิงแสงเพื่อดูความผิดปกติ/ระยะขัดข้อง
-สายใต้น้ำต้องใช้: Long-range 40–50 dB
+เทคนิค decode สัญญาณ coherent ด้วย LO laser
 
-🔹OSNR (Optical Signal-to-Noise Ratio)
+MFD (Mode Field Diameter)
 
-อัตราส่วนสัญญาณ/Noise
-สำคัญที่สุดของ DWDM
-QPSK: ~14 dB
-10G NRZ: 18–23 dB
+ขนาดสนามแสงของ fiber
+มีผลต่อ splice loss
 
-🔹PFE (Power Feeding Equipment)
+Marine Repair
 
-จ่ายไฟ DC ให้ repeater
-แรงดัน: ±1.5–10 kV
-โหมด: Constant current
-APG: ใช้ 1.0–1.5 A
+ขั้นตอนซ่อมสายทะเล
+ROV → Cut → Pickup → Joint → Relay → Test
 
-🔹Power Budget
+MUX/DEMUX (Passive)
 
-การคำนวณกำลังขยายและ loss ทั้งระบบ
-สำคัญก่อนเพิ่ม channel
+อุปกรณ์รวม/แยกช่องแบบ fixed grid
 
-🔹 R – S
+#️⃣ O – P
 
-🔹Repeater
+OADM (Optical Add/Drop Multiplexer)
 
-EDFA ใต้น้ำต่อกันเป็น chain
-ระยะ: 60–80 km/ตัว
+เพิ่ม/ดรอปช่องใน BU หรือ ROADM
 
-🔹ROADM
+OPM (Optical Power Meter)
 
-สวิตช์ออปติคสำหรับเพิ่ม/ดรอปช่องแบบ dynamic
-APG: มี BU แบบ ROADM บางจุด
+ใช้วัดช่องทีละ wavelength
 
-🔹RPL (Route Position List)
+ORL (Optical Return Loss)
 
-พิกัดเส้นทางสายใต้น้ำทั้งหมด
+การสะท้อนรวมของระบบ
+ค่าดีควร < −40 dB
 
-🔹SDM (Space Division Multiplexing)
+OTDR
 
-เทคโนโลยีอนาคต Multi-core / Multi-fiber
-เพิ่ม capacity แบบไม่เพิ่ม nonlinear
+วัดตำแหน่งเสีย
+สายทะเลใช้รุ่น 40–50 dB dynamic
 
-🔹SLM (Submarine Line Monitoring)
+OSNR (Optical SNR)
 
-ระบบ monitor สถานะ repeater + BU
-ผ่าน supervisory channel
+ตัวชี้วัดคุณภาพสัญญาณ
 
-🔹 S – W
+QPSK ≥ 14 dB
 
-🔹Span
+10G ≥ 18–23 dB
 
-ระยะระหว่าง repeater 2 ตัว
-ค่ามาตรฐาน: 50–80 km
+PFE (Power Feeding Equipment)
 
-🔹Span Loss
+จ่ายไฟให้ repeater chain
 
-loss ของ span
-ปกติ: 9–14 dB
+±1.5–10 kV
 
-🔹Superchannel
+1.0–1.5 A (APG)
 
-หลาย carriers รวมเป็นช่องใหญ่
-เช่น 400G, 600G
+Pilot Tone
 
-🔹WDM / DWDM
+สัญญาณกำกับ power บางระบบ DWDM ใช้ monitor per channel
 
-หลายช่องในไฟเบอร์เส้นเดียว
-Spacing: 50/37.5 GHz
+Power Budget
 
-🔹WSS (Wavelength Selective Switch)
+การคำนวณ gain-loss ของระบบทั้งหมด
+สำคัญเวลาเพิ่มช่อง
 
-ตัวสวิตช์ปรับช่องใน ROADM
-IL: 5–7 dB
+#️⃣ R – S
+
+Repeater
+
+EDFA ใต้น้ำ
+60–80 km/ตัว
+
+ROADM
+
+สวิตช์ optical แบบ dynamic
+ใช้ WSS ในการ routing wavelength
+
+RPL (Route Position List)
+
+แผนที่พิกัดเส้นทางสายใต้น้ำทั้งหมด
+
+SDM (Space Division Multiplexing)
+
+แนวคิด multi-core/multi-fiber pair เพิ่ม capacity
+
+SLM (Submarine Line Monitoring)
+
+ตรวจสถานะ repeater/pump ผ่าน supervisory channel
+
+Span
+
+ระหว่าง repeater 2 ตัว
+ปกติ 50–80 km
+
+Span Loss
+
+loss ต่อ span
+ทั่วไป 9–14 dB
+
+Superchannel
+
+หลาย carriers รวมเป็น logical channel
+เช่น 400G/600G
+
+Surge Protection
+
+ระบบป้องกันไฟกระชากของ PFE/CLS
+
+#️⃣ T – W
+
+Tilt Compensation
+
+แก้ gain tilt ของ spectrum
+
+Trouble Isolation
+
+แยกให้ได้ว่าเสียจาก
+Wet / Dry / Terrestrial
+
+Tunable Laser
+
+Laser ปรับ wavelength ได้ตาม ITU grid
+
+Voltage Standing Wave (VSW)
+
+การสะท้อนใน conductor เมื่อสูญเสียผิดปกติ
+
+Wavelength Drift
+
+การลอยของ wavelength จากความร้อน
+
+WDM / DWDM
+
+หลายช่องในเส้นเดียว
+spacing 50 / 37.5 GHz
+
+WSS (Wavelength Selective Switch)
+
+ตัวสวิตช์ใน ROADM
+IL 5–7 dB
