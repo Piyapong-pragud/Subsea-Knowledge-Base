@@ -8,4 +8,4 @@ Welcome!
 - [Phase 3 – Advanced](phase3.md)
 - [Glossary](glossary.md)
 
-<img src="images/CV_PNG_L300.png" width="300" height="auto">
+<img src="images/pg_vassel.jpg" width="300" height="auto">
