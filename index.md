@@ -31,6 +31,11 @@
 
 ---
 
+### 📷 Field Operation Gallery
+- [Photos from Field Operations](gallery.md)
+
+---
+
 <p align="center">
   <img src="images/pg_vassel.jpg" width="60%">
 </p>
