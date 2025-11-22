@@ -39,7 +39,7 @@ Repeater คือหัวใจของระบบใต้น้ำ ใช�
 - High-voltage bypass switch  
 - Pressure-resistant housing (Titanium)
 
-  <p align="center">
+<p align="center">
   <img src="images/pump-laser-edfa.png" width="420">
 </p><br>
 
