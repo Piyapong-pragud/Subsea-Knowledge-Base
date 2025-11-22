@@ -24,6 +24,17 @@
 
 ### 🔵 Optical Transmission Systems
 - [Transponder & DWDM Transmission](transponder-transmission.md)
+- [Optical Performance & Monitoring](optical-performance.md)
+
+---
+
+### 🌊 Wet Plant Engineering
+- [Wet Plant – Repeater, BU, Cable Structure](wet-plant-engineering.md)
+
+---
+
+### 🛠 Fault Casebook (Troubleshooting)
+- [Case Study – Ground Fault](fault-casebook.md)
 
 ---
 
