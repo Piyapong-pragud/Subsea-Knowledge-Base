@@ -3,7 +3,7 @@
 Welcome!
 > This knowledge base compiles foundational, intermediate, and advanced concepts 
 > of submarine cable systems, covering optical transmission, PFE, grounding, 
-> DWDM, repeater chains, and network architecture for APG/CSN operations.
+> DWDM, repeater chains, and network architecture for Submarine Cable operations.
 
 ---
 ### 📘 Knowledge Sections
