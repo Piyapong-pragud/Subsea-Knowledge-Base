@@ -1,121 +1,120 @@
-# Phase 3 – Advanced
- 🟧 Phase 3 – Advanced (ระดับวิศวกรออกแบบ/ผู้เชี่ยวชาญ)
+# 🟧 Phase 3 – Advanced (ระดับวิศวกรออกแบบ / ผู้เชี่ยวชาญ)
 
-1) Power Budget Calculation (รวมสาย, BU, ค่าต่าง ๆ)
-คิดจาก
-Fiber loss
+Phase ขั้นสูงสำหรับผู้ที่ต้องออกแบบระบบ, ขยายความจุ, วิเคราะห์ Margin และทำ Predictive Analysis ในระบบสายใต้น้ำรุ่นใหม่
 
+---
 
-Splice loss
+# 1) Power Budget Calculation (การคำนวณกำลังของสายใต้น้ำ)
 
+เป็นหัวใจของการออกแบบระบบ Submarine Optical Transmission เพื่อให้รู้ว่า “ลิงก์รองรับ capacity ได้ถึงระดับไหน”
 
-BU insertion loss
+องค์ประกอบสำคัญ:
 
+- **Fiber attenuation**  
+- **Splice loss**  
+- **BU insertion loss**  
+- **EDFA gain & tilt**  
+- **Nonlinear penalties (NLI)**  
+- **OSNR margin**  
+- **FEC Threshold (Q / BER)**  
+- **Aging margin + หลังซ่อมสาย (repair penalty)**  
 
-EDFA gain
+สิ่งที่ใช้ต่อยอด:
 
+- Upgrade 100G → 200G → 400G  
+- ตรวจ feasibility ของการเพิ่มช่อง  
+- วิเคราะห์ว่าระบบเก่าสามารถรับ coherent generation ใหม่หรือไม่
 
-Nonlinear penalties
+---
 
+# 2) Capacity Planning & SDM Technology
 
-OSNR margin
+## ✔ SDM = Space Division Multiplexing  
+เทคโนโลยีเพิ่มความจุสายใต้น้ำยุคใหม่
 
+รูปแบบ SDM:
 
-FEC threshold
+- **Multi-core fiber (MCF)**  
+- **Multi-fiber pair system** (จำนวน FP เยอะ แต่กำลังต่อคู่ต่ำเพื่อลด nonlinear)  
 
+ข้อดี:
 
-Margin aging + repairs
+- ลด nonlinear  
+- เพิ่ม throughput ต่อระบบ  
+- ใช้ EDFA per-fiber pair แบบกำลังต่ำ (low-power repeater)  
+- ใช้ในระบบยุคใหม่ เช่น **JUPITER, 2Africa, Grace Hopper**
 
+---
 
-ใช้สำหรับ
-Upgrade 100G → 200G
+# 3) Predictive Maintenance (การบำรุงรักษาเชิงคาดการณ์)
 
+การดูสุขภาพสายใต้น้ำระยะยาว โดยอาศัยข้อมูลหลายปีประกอบกัน
 
-ตรวจ feasibility ของการเพิ่มช่อง
+สิ่งที่ต้องวิเคราะห์:
 
+- **OSNR drift** (ลดลงเรื่อย ๆ ตามอายุ amplifier)  
+- **OTDR baseline year-to-year comparison**  
+- **Pump aging** (pump power / pump current drift)  
+- **Fiber attenuation aging** ~0.002 dB/km/yr  
 
+เครื่องมือที่ใช้:
 
-2) Capacity Planning & SDM
-SDM = Space Division Multiplexing
-Multi-core fiber
+- AI monitoring  
+- Time-series modeling  
+- Machine learning (เริ่มใช้ในบาง Operator และผู้ผลิตระบบ)  
 
+เป้าหมาย:
 
-Multi-fiber pair
+- ตรวจแนวโน้มก่อนเกิด outage  
+- ลด downtime  
+- กำหนดเวลา repair/proactive maintenance
 
+---
 
-ลด nonlinear + เพิ่ม capacity
+# 🟦 แหล่งเรียนรู้ (Resources)
 
+---
 
-ใช้ในระบบใหม่ ๆ (เช่น JUPITER, 2Africa)
+## 1) ITU-T Publications ที่เกี่ยวข้อง
 
+- **G.973** – Repeaterless  
+- **G.977** – Repeatered Systems  
+- **G.650.x** – Fiber measurement  
+- **G.Supxx** – Submarine Supplements  
 
+---
 
-3) Predictive Maintenance
-การวิเคราะห์ drift ของ OSNR
+## 2) ICPC (International Cable Protection Committee)
 
+- Hazard maps  
+- Marine protection standards  
+- Fishing zones & cable-route planning  
 
-การดู OTDR baseline เทียบปีต่อปี
+---
 
+## 3) SubTel Forum (ดีที่สุดสำหรับข่าว Subsea)
 
-การคาดการณ์ pump aging
+- Market reports  
+- System maps  
+- Whitepapers  
+- Repair database  
+- Industry updates ทุกปี  
 
+---
 
-Fiber attenuation aging ~0.002 dB/km/yr
+## 4) หนังสือที่แนะนำ
 
+- *Undersea Fiber Communication Systems* – José Chesnoy  
+- *Submarine Optical Cable Engineering*  
+- HMN Tech, ASN, SubCom whitepapers (ฟรีหลายตัว)
 
-เครื่องมือ
-AI monitoring
+---
 
+# 🎯 สรุป Phase 3
 
-Time-series model
+Phase 3 คือระดับ “Design & Expert”  
+เน้นการคำนวณเชิงลึก การวางแผนระบบสายรุ่นใหม่ และเทคโนโลยีล้ำสมัย เช่น SDM, AI-based monitoring
 
+เหมาะสำหรับวิศวกรที่ต้องการต่อยอดความรู้จาก Phase 1–2 ไปสู่การออกแบบระบบสายใต้น้ำเต็มรูปแบบ
 
-Machine learning (เริ่มใช้ในบาง operator)
-
-
-
-🟦 แหล่งเรียนรู้ (Resources)
-1) ITU-T Publications
-G.973 – Repeaterless
-
-
-G.977 – Repeatered Systems
-
-
-G.650 – Fiber measurement
-
-
-G.Supxx – Submarine supplements
-
-
-2) ICPC
-Hazard maps
-
-
-Marine protection standards
-
-
-Fishing zones & cable routes
-
-
-3) SubTel Forum (ดีที่สุดสำหรับข่าว Subsea)
-Market reports
-
-
-System maps
-
-
-Whitepapers
-
-
-Repair database
-
-
-4) หนังสือที่แนะนำ
-Undersea Fiber Communication Systems – José Chesnoy
-
-
-Submarine Optical Cable Engineering
-
-
-HMN Tech / ASN / SubCom whitepapers
+---
