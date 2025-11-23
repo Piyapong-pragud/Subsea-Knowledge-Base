@@ -30,6 +30,7 @@
 - [Nonlinear Effects in Subsea Systems](nonlinear-effects.md)
 - [SLTE Vendor Deep Guide (ASN / NEC / SubCom / HMN)](vendor-slte-guide.md)
 - [Optical Budget & OSNR Calculators](optical-calculator.md)
+- [Wavelength & Spectral Engineering](wavelength.md)
 
 ---
 2
