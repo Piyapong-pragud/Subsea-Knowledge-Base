@@ -1,4 +1,4 @@
-# Subsea Knowledge Base – Piyapong D.
+# Subsea Knowledge  – Piyapong D.
 
 > A complete engineering guide for Submarine Cable Systems  
 > Wet Plant • Dry Plant • Optical Transmission • PFE • Grounding • Marine Ops • NOC • Fault Handling
