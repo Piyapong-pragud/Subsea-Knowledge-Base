@@ -91,7 +91,8 @@
 - [Subsea Glossary A–Z](glossary.md)
 
 ---
-
+<!--
 <p align="center">
   <img src="images/pg_vassel.jpg" width="60%">
 </p>
+-->
