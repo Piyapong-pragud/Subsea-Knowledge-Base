@@ -7,16 +7,6 @@
   <input type="text" id="searchBox" placeholder="Search..." 
          style="width: 40%; padding: 10px; font-size: 16px;">
 
-  <button id="searchButton" 
-          style="padding: 10px 15px; font-size: 16px; cursor: pointer;">
-    Search
-  </button>
-</div>
-
-<ul id="results"></ul>
-
-<script src="search.js"></script>
-
 ---
 
 ## 📘 Knowledge Sections
@@ -87,8 +77,4 @@
 - [Subsea Glossary A–Z](glossary.md)
 
 ---
-<!--
-<p align="center">
-  <img src="images/pg_vassel.jpg" width="60%">
-</p>
--->
+
