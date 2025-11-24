@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>coherent-transmission.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="coherent-optical-transmission-%E2%80%93-end-to-end-architecture">Coherent Optical Transmission – End-to-End Architecture</h1>
+<p>Coherent transmission is the foundation of modern submarine and long-haul optical<br>
+communication systems. It enables high capacity, long reach, advanced modulation<br>
+formats, and sophisticated digital signal processing (DSP).</p>
+<p>This document provides a full end-to-end view of coherent transmission,<br>
+from laser generation → IQ modulation → fiber propagation → EDFA chain →<br>
+coherent receiver → DSP recovery.</p>
+<hr>
+<h2 id="%F0%9F%93%98-1-what-is-coherent-transmission">📘 1. What Is Coherent Transmission?</h2>
+<p>Coherent optical transmission uses:</p>
+<ul>
+<li>A narrow-linewidth laser</li>
+<li>IQ (In-phase / Quadrature) modulation</li>
+<li>Dual polarization</li>
+<li>A coherent receiver with a local oscillator (LO)</li>
+<li>Digital signal processing (DSP)</li>
+</ul>
+<p>Unlike legacy IM-DD (10G NRZ), coherent systems detect <strong>phase + amplitude</strong>,<br>
+not only power level, enabling:</p>
+<ul>
+<li>Advanced modulation formats (QPSK / 16QAM / 64QAM)</li>
+<li>Compensation for dispersion and PMD</li>
+<li>Error correction using powerful FEC</li>
+<li>Long-haul and submarine performance</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%98-2-coherent-transmitter-architecture">📘 2. Coherent Transmitter Architecture</h2>
+<h3 id="main-components">Main components:</h3>
+<ul>
+<li>Narrow linewidth tunable laser (≤ 100 kHz)</li>
+<li>IQ Modulator (LiNbO₃ or silicon photonics)</li>
+<li>Driver amplifiers</li>
+<li>Polarization multiplexing</li>
+<li>Pulse shaping filters (Nyquist)</li>
+<li>FEC encoder</li>
+</ul>
+<h3 id="transmitter-block-diagram">Transmitter Block Diagram</h3>
+<p>Laser (narrow linewidth)
+│
+▼
+IQ Modulator (I/Q)
+┌─────────┬─────────┐
+│Amplitude│  Phase  │
+│ Control │ Control │
+└─────────┴─────────┘
+│
+Polarization Split
+│
+DP-QPSK / DP-16QAM Signal
+│
+Pulse Shaping Filter
+│
+Fiber</p>
+<hr>
+<h2 id="%F0%9F%93%98-3-iq-modulation-core-of-coherent-tx">📘 3. IQ Modulation (Core of Coherent Tx)</h2>
+<p>The IQ modulator controls:</p>
+<ul>
+<li><strong>I-branch</strong> → amplitude</li>
+<li><strong>Q-branch</strong> → phase</li>
+</ul>
+<p>By combining both, the transmitter can generate any point in a constellation:</p>
+<ul>
+<li>QPSK → 4 symbols</li>
+<li>8QAM → 8 symbols</li>
+<li>16QAM → 16 symbols</li>
+<li>64QAM → 64 symbols</li>
+</ul>
+<p>This directly determines the number of bits per symbol and the OSNR required.</p>
+<hr>
+<h2 id="%F0%9F%93%98-4-polarization-multiplexing-dp-qpsk--dp-16qam">📘 4. Polarization Multiplexing (DP-QPSK / DP-16QAM)</h2>
+<p>To double spectral efficiency, coherent systems transmit:</p>
+<ul>
+<li>One data stream in <strong>X-polarization</strong></li>
+<li>Another in <strong>Y-polarization</strong></li>
+</ul>
+<p>Combined capacity:</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Bits per Symbol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QPSK</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>DP-QPSK</strong></td>
+<td><strong>4</strong></td>
+</tr>
+<tr>
+<td>16QAM</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>DP-16QAM</strong></td>
+<td><strong>8</strong></td>
+</tr>
+</tbody>
+</table>
+<p>This is a critical feature for high-capacity subsea systems.</p>
+<hr>
+<h2 id="%F0%9F%93%98-5-propagation-in-fiber-submarine-vs-terrestrial">📘 5. Propagation in Fiber (Submarine vs Terrestrial)</h2>
+<p>Signals pass through:</p>
+<ul>
+<li>Fiber attenuation (0.17–0.19 dB/km)</li>
+<li>Chromatic dispersion (17 ps/nm/km)</li>
+<li>PMD (0.1–1 ps/√km)</li>
+<li>Nonlinear effects (SPM, XPM, FWM)</li>
+<li>EDFA noise accumulation (ASE)</li>
+</ul>
+<p>Submarine differences:</p>
+<ul>
+<li>Long spans (60–100 km)</li>
+<li>Hundreds of repeaters</li>
+<li>Tight OSNR budget</li>
+<li>Better CD uniformity</li>
+<li>No transient events like ROADM bypass</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%98-6-repeated-amplification-edfa-chain">📘 6. Repeated Amplification (EDFA Chain)</h2>
+<p>Submarine repeaters use <strong>EDFA amplifiers</strong>:</p>
+<ul>
+<li>Pump wavelength: 980 or 1480 nm</li>
+<li>Gain per stage: 14–20 dB</li>
+<li>Noise figure ~4.5–6 dB</li>
+<li>Hundreds of amplifiers in series</li>
+<li>Power fed by submarine conductor (1–1.5 A DC)</li>
+</ul>
+<p>ASE accumulates through all repeaters →<br>
+OSNR gradually drops along the cable.</p>
+<hr>
+<h2 id="%F0%9F%93%98-7-coherent-receiver-architecture">📘 7. Coherent Receiver Architecture</h2>
+<p>The coherent receiver uses:</p>
+<ul>
+<li>Optical hybrid (mixing incoming light with LO laser)</li>
+<li>Balanced photodiodes (BPD)</li>
+<li>Sampling ADCs</li>
+<li>High-speed DSP</li>
+</ul>
+<h3 id="receiver-block-diagram">Receiver Block Diagram</h3>
+<p>Incoming Signal ───┐
+│
+Optical Hybrid
+│</p>
+<p>LO Laser ───────────┘ │ Balanced Photodiodes │ ADCs │ DSP │ Bits Out</p>
+<p>The LO laser enables phase recovery by mixing with the received signal<br>
+(in contrast to direct detection systems).</p>
+<hr>
+<h2 id="%F0%9F%93%98-8-dsp-processing-the-brain-of-the-system">📘 8. DSP Processing (The Brain of the System)</h2>
+<p>DSP compensates all major transmission impairments:</p>
+<h3 id="electrical-domain">Electrical domain:</h3>
+<ul>
+<li>IQ imbalance correction</li>
+<li>Adaptive equalization</li>
+</ul>
+<h3 id="optical-domain">Optical domain:</h3>
+<ul>
+<li>Chromatic dispersion compensation</li>
+<li>PMD compensation</li>
+<li>Phase noise recovery</li>
+<li>Polarization tracking</li>
+<li>Carrier frequency offset correction</li>
+</ul>
+<h3 id="system-domain">System domain:</h3>
+<ul>
+<li>Nonlinear mitigation (partial)</li>
+<li>FEC decoding</li>
+<li>Constellation shaping</li>
+</ul>
+<p>DSP is why coherent signals can:</p>
+<ul>
+<li>Cross oceans</li>
+<li>Withstand repeater gain tilt</li>
+<li>Survive nonlinear distortions</li>
+<li>Maintain stable Q-factor</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%98-9-baud-rate-considerations">📘 9. Baud Rate Considerations</h2>
+<p>Symbol rate affects bandwidth, nonlinear tolerance, and reach.</p>
+<p>Typical submarine values:</p>
+<ul>
+<li>100G DP-QPSK → ~32 Gbaud</li>
+<li>200G DP-QPSK → dual carrier or ~32–40 Gbaud</li>
+<li>400G → 60–70 Gbaud (with advanced shaping)</li>
+</ul>
+<p>Higher baud rate →</p>
+<ul>
+<li>higher capacity<br>
+– lower tolerance to impairments</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%98-10-osnr-requirements-critical-in-submarine-systems">📘 10. OSNR Requirements (Critical in Submarine Systems)</h2>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>OSNR Required (0.1 nm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BPSK</td>
+<td>7–9 dB</td>
+</tr>
+<tr>
+<td><strong>QPSK</strong></td>
+<td><strong>11–14 dB</strong></td>
+</tr>
+<tr>
+<td>8QAM</td>
+<td>15–17 dB</td>
+</tr>
+<tr>
+<td>16QAM</td>
+<td>18–20 dB</td>
+</tr>
+<tr>
+<td>64QAM</td>
+<td>22–24 dB</td>
+</tr>
+</tbody>
+</table>
+<p>Submarine repeaters support QPSK reliably.<br>
+Higher-order QAM is limited to short-haul/terrestrial systems.</p>
+<hr>
+<h2 id="%F0%9F%93%98-11-end-to-end-transmission-flow-summary">📘 11. End-to-End Transmission Flow Summary</h2>
+<p>Laser → IQ Modulator → DP-QPSK → Pulse Shaping → Fiber → EDFA Repeaters → Accumulated ASE → Coherent Receiver → LO Laser → Optical Hybrid → BPD → ADC → DSP → Bits / Frames / Traffic</p>
+<p>This completes one full “coherent chain” across the ocean.</p>
+<hr>
+<h2 id="%F0%9F%93%98-12-why-coherent-transmission-is-ideal-for-submarine-systems">📘 12. Why Coherent Transmission Is Ideal for Submarine Systems</h2>
+<ul>
+<li>High tolerance to noise</li>
+<li>Long-haul capability</li>
+<li>DSP corrects dispersion and PMD</li>
+<li>Excellent nonlinear tolerance</li>
+<li>Supports flexible spectral shaping</li>
+<li>Works on legacy wet plants (G.977)</li>
+<li>Enables upgrades (10G → 100G → 200G) without new wet plant</li>
+</ul>
+<p>Submarine coherent transmission =<br>
+<strong>the most robust long-distance communication method ever built.</strong></p>
+<hr>
+<p>File: coherent-transmission.md
+Category: Optical Transmission Systems</p>
+
+</body>
+</html>

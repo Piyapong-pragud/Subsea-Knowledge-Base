@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>optical-transmission.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<h1 id="optical-transmission-systems-%E2%80%93-subsea-layer-overview">Optical Transmission Systems – Subsea Layer Overview</h1>
+<p>🔵 <strong>Optical Transmission (คลื่นแสง)</strong> คือหัวใจหลักของ Submarine Cable<br>
+ครอบคลุม: Transponder • WDM • EDFA • OSNR • DSP • ROADM • Nonlinear • Monitoring<br>
+เอกสารนี้เป็นภาพรวมระดับ “Engineer → Specialist”</p>
+<hr>
+<h2 id="1-optical-layer-architecture-%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%AA%E0%B8%B8%E0%B8%94">1) Optical Layer Architecture (ภาพใหญ่ที่สุด)</h2>
+<p>Optical Layer ของระบบใต้น้ำประกอบด้วยส่วนสำคัญดังนี้:</p>
+<ul>
+<li><strong>SLTE / Transponder</strong></li>
+<li><strong>WDM Mux/Demux</strong></li>
+<li><strong>ROADM / WSS (บางระบบ เช่น APG)</strong></li>
+<li><strong>Repeater Chain (EDFA ใต้น้ำ)</strong></li>
+<li><strong>Performance Monitoring</strong></li>
+<li><strong>DSP (Coherent Engine)</strong></li>
+<li><strong>Power Control / Gain Control</strong></li>
+</ul>
+<p>โครงสร้างแบบย่อ:</p>
+<p>[SLTE/Transponder] → [WDM] → [ROADM/WSS] → [EDFA Chain] → WET PLANT → [EDFA] → [SLTE]</p>
+<hr>
+<h2 id="2-transponder--coherent-engine">2) Transponder / Coherent Engine</h2>
+<h3 id="%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88">หน้าที่</h3>
+<ul>
+<li>สร้างคลื่นแสงความเร็วสูง (Tx)</li>
+<li>รับคลื่นแสงแล้ว decode (Rx)</li>
+<li>เลือกรูปแบบ modulation เช่น QPSK / 8QAM / 16QAM</li>
+<li>ใช้ DSP แก้ noise, dispersion, nonlinear</li>
+</ul>
+<h3 id="%E0%B8%AA%E0%B9%88%E0%B8%A7%E0%B8%99%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%81">ส่วนประกอบหลัก</h3>
+<ul>
+<li>FEC Encoder</li>
+<li>IQ Modulator</li>
+<li>Tunable Laser</li>
+<li>DSP Receiver</li>
+</ul>
+<h3 id="vendors">Vendors</h3>
+<p>Ciena • Nokia • Infinera • SubCom • NEC • HMN</p>
+<hr>
+<h2 id="3-dwdm-channel-plan-%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%9C%E0%B8%B1%E0%B8%87%E0%B8%8A%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B2%E0%B8%93">3) DWDM Channel Plan (แผนผังช่องสัญญาณ)</h2>
+<h3 id="spacing-%E0%B8%95%E0%B9%88%E0%B8%AD%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A">Spacing ต่อระบบ</h3>
+<ul>
+<li><strong>APG:</strong> 37.5 GHz</li>
+<li><strong>CSN:</strong> 50 GHz</li>
+<li>ระบบใหม่: <strong>Flex-grid 12.5 GHz slot</strong></li>
+</ul>
+<h3 id="launch-power">Launch Power</h3>
+<ul>
+<li>ช่วงมาตรฐาน: <strong>−2 ถึง +1 dBm/ช่อง</strong></li>
+<li>ขึ้นกับ nonlinear limit ของสาย</li>
+</ul>
+<h3 id="%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B9%80%E0%B8%9B%E0%B8%81%E0%B8%95%E0%B8%A3%E0%B8%B1%E0%B8%A1">การจัดการสเปกตรัม</h3>
+<ul>
+<li>ปรับสมดุลให้ทุกช่องระดับกำลังใกล้เคียงกัน</li>
+<li>ใช้ <strong>GFF หรือ WSS</strong> เพื่อรักษา Flat Spectrum</li>
+</ul>
+<hr>
+<h2 id="4-roadm--wss-routing-%E0%B8%84%E0%B8%A5%E0%B8%B7%E0%B9%88%E0%B8%99%E0%B9%81%E0%B8%AA%E0%B8%87">4) ROADM / WSS (Routing คลื่นแสง)</h2>
+<h3 id="roadm-%E0%B8%97%E0%B8%B3%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3">ROADM ทำอะไร?</h3>
+<ul>
+<li>เพิ่ม/ลดช่อง (Add/Drop)</li>
+<li>ปรับ power ต่อช่อง</li>
+<li>จัดเส้นทาง wavelength แบบ dynamic</li>
+</ul>
+<h3 id="wss-wavelength-selective-switch">WSS (Wavelength Selective Switch)</h3>
+<ul>
+<li>Insertion Loss 5–7 dB</li>
+<li>ใช้ใน BU รุ่นใหม่ หรือ CLS ที่ทันสมัย</li>
+</ul>
+<hr>
+<h2 id="5-edfa-amplifier-%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%99%E0%B9%89%E0%B8%B3">5) EDFA Amplifier (ใต้น้ำ)</h2>
+<h3 id="edfa-erbium-doped-fiber-amplifier">EDFA (Erbium-Doped Fiber Amplifier)</h3>
+<p>ใช้เพิ่มกำลังแสงทุก 60–80 km</p>
+<p><strong>Key Specs:</strong></p>
+<ul>
+<li>Gain ~ 14–20 dB</li>
+<li>Noise Figure ~ 4–5 dB</li>
+<li>Pump laser: 980 nm / 1480 nm</li>
+</ul>
+<h3 id="repeater-chain">Repeater Chain</h3>
+<p>สายความยาว 2000–10,000 km<br>
+จะมี repeater 30–200 ตัวตามระยะ</p>
+<hr>
+<h2 id="6-osnr-%E2%80%93-optical-signal-to-noise-ratio">6) OSNR – Optical Signal-to-Noise Ratio</h2>
+<p>ตัวชี้วัดคุณภาพสำคัญที่สุดของ Optical Layer</p>
+<h3 id="%E0%B8%84%E0%B9%88%E0%B8%B2%E0%B9%80%E0%B8%9B%E0%B9%89%E0%B8%B2%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2%E0%B8%95%E0%B9%88%E0%B8%AD-modulation">ค่าเป้าหมายต่อ modulation</h3>
+<ul>
+<li><strong>QPSK:</strong> ≥ 14 dB</li>
+<li><strong>8QAM:</strong> ≥ 16 dB</li>
+<li><strong>16QAM:</strong> ≥ 18 dB</li>
+<li><strong>64QAM:</strong> ≥ 21 dB</li>
+</ul>
+<h3 id="%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%A7%E0%B8%B1%E0%B8%94">วิธีวัด</h3>
+<ul>
+<li>SLTE internal monitor</li>
+<li>Optical Spectrum Analyzer (OSA)</li>
+<li>Performance Monitoring (PM)</li>
+</ul>
+<hr>
+<h2 id="7-ber--fec">7) BER / FEC</h2>
+<h3 id="fec-forward-error-correction">FEC (Forward Error Correction)</h3>
+<ul>
+<li>Coherent ใช้ <strong>SD-FEC</strong></li>
+<li>10G ใช้ <strong>RS(255,239)</strong></li>
+</ul>
+<h3 id="threshold">Threshold</h3>
+<ul>
+<li>Pre-FEC ต้องดีขึ้นกว่า <strong>1×10⁻²</strong></li>
+<li>Post-FEC ควรใกล้ 0</li>
+</ul>
+<hr>
+<h2 id="8-nonlinear-effects-%E0%B8%AA%E0%B8%B3%E0%B8%84%E0%B8%B1%E0%B8%8D%E0%B9%83%E0%B8%99%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A5%E0%B8%B6%E0%B8%81">8) Nonlinear Effects (สำคัญในสายน้ำลึก)</h2>
+<h3 id="1-spm-%E2%80%93-self-phase-modulation">1) SPM – Self Phase Modulation</h3>
+<p>power สูง → pulse บิด</p>
+<h3 id="2-xpm-%E2%80%93-cross-phase-modulation">2) XPM – Cross Phase Modulation</h3>
+<p>ช่องข้างเคียงรบกวนกัน</p>
+<h3 id="3-fwm-%E2%80%93-four-wave-mixing">3) FWM – Four Wave Mixing</h3>
+<p>ความถี่ใหม่เกิดขึ้น → ทำให้บางช่อง OSNR ตก</p>
+<h3 id="4-raman-scattering">4) Raman Scattering</h3>
+<p>เกิด slope: λ สั้นตก, λ ยาวขึ้น</p>
+<hr>
+<h2 id="9-constellation-analysis">9) Constellation Analysis</h2>
+<p>สัญญาณหลังผ่าน DSP จะถูกแสดงเป็นรูปแบบจุด</p>
+<p>สรุปอาการที่พบ:</p>
+<table>
+<thead>
+<tr>
+<th>อาการใน Constellation</th>
+<th>สาเหตุที่เป็นไปได้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>จุดเบลอ</td>
+<td>OSNR ต่ำ</td>
+</tr>
+<tr>
+<td>จุดกระจายแกนตั้ง</td>
+<td>Phase Noise</td>
+</tr>
+<tr>
+<td>จุดยืดแนวนอน</td>
+<td>Amplitude Noise</td>
+</tr>
+<tr>
+<td>วงรีเอียง</td>
+<td>LO Laser drift</td>
+</tr>
+<tr>
+<td>กระจายไม่เสถียร</td>
+<td>Nonlinear (SPM/XPM/FWM)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="10-optical-performance-monitoring-opm">10) Optical Performance Monitoring (OPM)</h2>
+<p>ค่าที่วัดได้:</p>
+<ul>
+<li>Power ต่อช่อง</li>
+<li>Spectrum Shape</li>
+<li>OSNR</li>
+<li>Q-factor</li>
+<li>CD (Chromatic Dispersion)</li>
+<li>PMD (Polarization Mode Dispersion)</li>
+<li>BER / FEC status</li>
+</ul>
+<hr>
+<h2 id="11-slte-alarm-%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%AA%E0%B8%B3%E0%B8%84%E0%B8%B1%E0%B8%8D">11) SLTE Alarm ที่สำคัญ</h2>
+<ul>
+<li>Loss of Signal (LOS)</li>
+<li>Loss of Frame (LOF)</li>
+<li>OSNR Deviation</li>
+<li>Q-factor Low</li>
+<li>PMD High</li>
+<li>FEC Uncorrectable</li>
+<li>Frequency Offset Drift</li>
+<li>Pilot Tone Missing</li>
+</ul>
+<hr>
+<h2 id="12-channel-provisioning-flow-%E0%B8%82%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%AD%E0%B8%99%E0%B9%80%E0%B8%9B%E0%B8%B4%E0%B8%94%E0%B8%8A%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88">12) Channel Provisioning Flow (ขั้นตอนเปิดช่องใหม่)</h2>
+<ol>
+<li>ตรวจ OSNR budget</li>
+<li>ตั้ง launch power</li>
+<li>เปิดช่องใน ROADM/WSS</li>
+<li>ตรวจ BER / Q-factor</li>
+<li>ตรวจ Constellation</li>
+<li>Lock channel &amp; monitoring</li>
+</ol>
+<hr>
+<h2 id="13-power-equalization--spectrum-flatness">13) Power Equalization &amp; Spectrum Flatness</h2>
+<p>ทำโดย:</p>
+<ul>
+<li>GFF (Gain Flattening Filter)</li>
+<li>WSS (Per-channel equalization)</li>
+<li>Pump Power Control</li>
+<li>Equalization Tables</li>
+</ul>
+<hr>
+<h2 id="14-fault-%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%9E%E0%B8%9A%E0%B8%9A%E0%B9%88%E0%B8%AD%E0%B8%A2%E0%B9%83%E0%B8%99-optical-layer">14) Fault ที่พบบ่อยใน Optical Layer</h2>
+<ul>
+<li>Power drop รายช่อง → WSS misalignment</li>
+<li>OSNR ตกทั้ง spectrum → Repeater aging</li>
+<li>CD Jump → มี splice ใหม่จากการซ่อม</li>
+<li>Full band RDI → Interface/Transponder ปัญหา</li>
+<li>สัญญาณแกว่ง → Laser drift, PLL ไม่ล็อก</li>
+</ul>
+<hr>
+<h2 id="%E0%B8%AA%E0%B8%A3%E0%B8%B8%E0%B8%9B-optical-layer">สรุป Optical Layer</h2>
+<blockquote>
+<p>Optical Transmission =<br>
+ระบบใหญ่ที่ประกอบด้วย DSP + Modulation + WDM + EDFA + Monitoring<br>
+ทำงานร่วมกันเพื่อส่งสัญญาณหลายพันกิโลเมตรผ่านทะเลลึก</p>
+</blockquote>
+<hr>
+
+</body>
+</html>

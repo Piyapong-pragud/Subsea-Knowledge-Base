@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>quiz-subsea.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<h1 id="subsea-engineering-quiz-%E2%80%93-%E0%B8%8A%E0%B8%B8%E0%B8%94%E0%B8%84%E0%B8%B3%E0%B8%96%E0%B8%B2%E0%B8%A1-50-%E0%B8%82%E0%B9%89%E0%B8%AD">Subsea Engineering Quiz – ชุดคำถาม (50 ข้อ)</h1>
+<p>แบบทดสอบครอบคลุมเนื้อหา:<br>
+Wet Plant • PFE • Grounding • Optical Transmission • Fault Handling • Monitoring</p>
+<hr>
+<h1 id="%F0%9F%9F%A6-part-1--wet-plant-basics-10-%E0%B8%82%E0%B9%89%E0%B8%AD">🟦 Part 1 — Wet Plant Basics (10 ข้อ)</h1>
+<ol>
+<li>
+<p>Span คืออะไรในระบบเคเบิลใต้น้ำ?<br>
+A) ระยะระหว่าง CLS<br>
+B) ระยะระหว่าง Repeater<br>
+C) ระยะรวมของสาย</p>
+</li>
+<li>
+<p>Repeater ใช้หลักการขยายใด?<br>
+A) Raman<br>
+B) EDFA<br>
+C) SOA</p>
+</li>
+<li>
+<p>ค่า attenuation ของสายใต้น้ำทั่วไปเท่าไหร่?<br>
+A) 0.12 dB/km<br>
+B) 0.17–0.18 dB/km<br>
+C) 0.25 dB/km</p>
+</li>
+<li>
+<p>BU ทำหน้าที่อะไร?<br>
+A) ขยายสัญญาณ<br>
+B) แยกสาขา / Add-Drop<br>
+C) ทำความสะอาด spectrum</p>
+</li>
+<li>
+<p>Lightweight cable ใช้ที่ไหน?<br>
+A) ใกล้ฝั่ง<br>
+B) กลางทะเลลึก<br>
+C) บริเวณหินใต้ทะเล</p>
+</li>
+<li>
+<p>Armored cable ใช้เพื่ออะไร?<br>
+A) ลด OSNR<br>
+B) ป้องกันลากอวน / สมอเรือ<br>
+C) เพิ่มค่า latency</p>
+</li>
+<li>
+<p>Pump laser ของ repeater ใช้ wavelength อะไร?<br>
+A) 1310 / 1490 nm<br>
+B) 980 / 1480 nm<br>
+C) 850 / 1300 nm</p>
+</li>
+<li>
+<p>อายุการใช้งานของ repeater อยู่ที่ประมาณ?<br>
+A) 10–15 ปี<br>
+B) 25–30 ปี<br>
+C) 40 ปี</p>
+</li>
+<li>
+<p>BU มาตรฐานเป็นแบบกี่ทาง?<br>
+A) 2-way<br>
+B) 3-way<br>
+C) 4-way</p>
+</li>
+<li>
+<p>Fiber tube ในสายใต้น้ำมีจำนวนกี่ไฟเบอร์?<br>
+A) 2–4 fibers<br>
+B) 12–24 fibers<br>
+C) 48 fibers</p>
+</li>
+</ol>
+<hr>
+<h1 id="%F0%9F%9F%A9-part-2--pfe--power-feeding-10-%E0%B8%82%E0%B9%89%E0%B8%AD">🟩 Part 2 — PFE &amp; Power Feeding (10 ข้อ)</h1>
+<ol start="11">
+<li>
+<p>PFE ใช้โหมดใดในการจ่ายไฟ?<br>
+A) Constant Voltage<br>
+B) Constant Current<br>
+C) Pulse Current</p>
+</li>
+<li>
+<p>SEF คืออะไร?<br>
+A) Feed 2 ฝั่ง<br>
+B) Feed ฝั่งเดียว + sea return<br>
+C) Earth-Free mode</p>
+</li>
+<li>
+<p>Sea Earth electrode อยู่ที่ใด?<br>
+A) ห้อง PFE<br>
+B) ในน้ำทะเล<br>
+C) บนหลังคา CLS</p>
+</li>
+<li>
+<p>Earth-Free mode ใช้เมื่อใด?<br>
+A) ทดสอบ isolate fault<br>
+B) ปกติระหว่าง operation<br>
+C) ช่วง marine repair</p>
+</li>
+<li>
+<p>กระแสในระบบ subsea อยู่ประมาณเท่าไหร่?<br>
+A) 0.2–0.5 A<br>
+B) 1.0–1.5 A<br>
+C) 3–5 A</p>
+</li>
+<li>
+<p>IR Test ใช้ตรวจอะไร?<br>
+A) OSNR<br>
+B) การรั่วลงทะเล<br>
+C) Fiber joint loss</p>
+</li>
+<li>
+<p>HV bypass ใน BU ใช้ทำอะไร?<br>
+A) bypass repeater ที่เสีย<br>
+B) ทำ equalization<br>
+C) ใช้ตรวจ pump aging</p>
+</li>
+<li>
+<p>โหมดใดปลอดภัยที่สุดในการตรวจ fault?<br>
+A) SEF<br>
+B) BEF<br>
+C) Earth-Free</p>
+</li>
+<li>
+<p>Return current ไหลทางไหน?<br>
+A) กลับใน conductor<br>
+B) ไหลผ่านน้ำทะเล<br>
+C) ไหลผ่าน fiber tube</p>
+</li>
+<li>
+<p>Conductor ภายในสายคือวัสดุใด?<br>
+A) Aluminum<br>
+B) Copper<br>
+C) Steel</p>
+</li>
+</ol>
+<hr>
+<h1 id="%F0%9F%9F%A7-part-3--optical-transmission-10-%E0%B8%82%E0%B9%89%E0%B8%AD">🟧 Part 3 — Optical Transmission (10 ข้อ)</h1>
+<ol start="21">
+<li>
+<p>OSNR ขั้นต่ำของ QPSK โดยทั่วไป?<br>
+A) 8 dB<br>
+B) 14 dB<br>
+C) 22 dB</p>
+</li>
+<li>
+<p>ระบบ Coherent แก้ Chromatic Dispersion ด้วยอะไร?<br>
+A) DCM<br>
+B) DSP<br>
+C) AWG</p>
+</li>
+<li>
+<p>APG ใช้ channel spacing เท่าไหร่?<br>
+A) 50 GHz<br>
+B) 37.5 GHz<br>
+C) 25 GHz</p>
+</li>
+<li>
+<p>Coherent ใช้ laser ประเภทใด?<br>
+A) Fixed<br>
+B) Tunable<br>
+C) Burst-mode</p>
+</li>
+<li>
+<p>อุปกรณ์ใดใช้ทำ Equalization?<br>
+A) GFF / WSS<br>
+B) EDFA<br>
+C) Pilot Tone</p>
+</li>
+<li>
+<p>ASE noise มาจากไหน?<br>
+A) Laser drift<br>
+B) EDFA<br>
+C) Raman pump</p>
+</li>
+<li>
+<p>XPM ส่งผลต่ออะไร?<br>
+A) Tilt ของ LO laser<br>
+B) Phase ของช่องข้างเคียง<br>
+C) Fiber aging</p>
+</li>
+<li>
+<p>Raman effect มีผลอย่างไร?<br>
+A) ช่องปลาย spectrum ดังขึ้น<br>
+B) ช่องต้น spectrum อ่อนลง<br>
+C) ไม่มีผลในสายใต้น้ำ</p>
+</li>
+<li>
+<p>Wavelength drift เกิดจากอะไร?<br>
+A) สายเคเบิลขาด<br>
+B) Laser อุณหภูมิไม่คงที่<br>
+C) BU switching</p>
+</li>
+<li>
+<p>จุดใน constellation เบลอแปลว่าอะไร?<br>
+A) OSNR ต่ำ<br>
+B) Fiber cut<br>
+C) SEF fault</p>
+</li>
+</ol>
+<hr>
+<h1 id="%F0%9F%9F%A5-part-4--fault--monitoring-10-%E0%B8%82%E0%B9%89%E0%B8%AD">🟥 Part 4 — Fault &amp; Monitoring (10 ข้อ)</h1>
+<ol start="31">
+<li>
+<p>OTDR ใช้วัดอะไร?<br>
+A) Fiber temperature<br>
+B) ระยะตำแหน่งเสีย<br>
+C) Splice angle</p>
+</li>
+<li>
+<p>IR ต่ำแปลว่าอะไร?<br>
+A) เริ่มรั่วลงทะเล<br>
+B) Fiber broken<br>
+C) ไม่มีผล</p>
+</li>
+<li>
+<p>SLM ใช้ตรวจอะไร?<br>
+A) Traffic usage<br>
+B) repeater / pump status<br>
+C) Backhaul routing</p>
+</li>
+<li>
+<p>Span drift หมายถึงอะไร?<br>
+A) Span loss เปลี่ยนตามเวลา<br>
+B) CD shift<br>
+C) Pump jump</p>
+</li>
+<li>
+<p>FEC uncorrectable แปลว่าอะไร?<br>
+A) ยังแก้ได้<br>
+B) เกิน threshold<br>
+C) ตัดสายทันที</p>
+</li>
+<li>
+<p>ช่องเดียว drop ส่วนใหญ่เกิดจาก?<br>
+A) Fiber cut<br>
+B) WSS alignment<br>
+C) EDFA fail</p>
+</li>
+<li>
+<p>OSNR ตกทั้ง spectrum เป็นสัญญาณของ?<br>
+A) BU fault<br>
+B) Repeater aging<br>
+C) Laser drift</p>
+</li>
+<li>
+<p>CD กระโดดเป็น step แปลว่า?<br>
+A) มี splice หลังซ่อม<br>
+B) Sea earth leak<br>
+C) Station Earth jump</p>
+</li>
+<li>
+<p>GSNR ต่ำแต่ OSNR ปกติ หมายถึง?<br>
+A) Nonlinear<br>
+B) ASE<br>
+C) CD issue</p>
+</li>
+<li>
+<p>BER ขึ้น spike ชั่วคราวส่วนใหญ่เกิดจาก?<br>
+A) Pump fail<br>
+B) Laser jitter<br>
+C) Sea earth crack</p>
+</li>
+</ol>
+<hr>
+<h1 id="subsea-quiz-%E2%80%93-part-5">Subsea Quiz – Part 5</h1>
+<h2 id="standards--compliance-10-%E0%B8%82%E0%B9%89%E0%B8%AD">Standards &amp; Compliance (10 ข้อ)</h2>
+<p>แบบทดสอบครอบคลุมมาตรฐาน ITU-T, ICPC, IEC ที่ใช้จริงในระบบ Submarine Cable</p>
+<hr>
+<h3 id="41-itu-t-g973-%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%AA%E0%B8%B3%E0%B8%AB%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B9%83%E0%B8%94">41) ITU-T G.973 ใช้สำหรับระบบแบบใด?</h3>
+<p>A) Repeatered<br>
+B) Repeaterless<br>
+C) BU Switching</p>
+<hr>
+<h3 id="42-%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B9%83%E0%B8%94%E0%B8%AD%E0%B8%A2%E0%B8%B9%E0%B9%88%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%A1%E0%B8%B2%E0%B8%95%E0%B8%A3%E0%B8%90%E0%B8%B2%E0%B8%99-itu-t-g977">42) ระบบใดอยู่ภายใต้มาตรฐาน ITU-T G.977?</h3>
+<p>A) Repeatered Submarine System<br>
+B) Fiber Construction<br>
+C) OSNR Measurement</p>
+<hr>
+<h3 id="43-itu-t-g974-%E0%B8%99%E0%B8%B4%E0%B8%A2%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B9%83%E0%B8%94">43) ITU-T G.974 นิยามเรื่องใด?</h3>
+<p>A) Fiber Type<br>
+B) Cable Structure<br>
+C) PFE Feeding</p>
+<hr>
+<h3 id="44-%E0%B8%A1%E0%B8%B2%E0%B8%95%E0%B8%A3%E0%B8%90%E0%B8%B2%E0%B8%99-fec-%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%81%E0%B8%B3%E0%B8%AB%E0%B8%99%E0%B8%94%E0%B9%84%E0%B8%A7%E0%B9%89%E0%B9%83%E0%B8%99%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B9%83%E0%B8%94">44) มาตรฐาน FEC ของระบบใต้น้ำกำหนดไว้ในข้อใด?</h3>
+<p>A) G.975 / G.975.1<br>
+B) G.654<br>
+C) G.652D</p>
+<hr>
+<h3 id="45-fiber-%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%99%E0%B8%B4%E0%B8%A2%E0%B8%A1%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B9%83%E0%B8%99%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%84%E0%B8%B7%E0%B8%AD%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B9%83%E0%B8%94">45) Fiber ที่นิยมใช้ในสายใต้น้ำคือข้อใด?</h3>
+<p>A) G.652D<br>
+B) G.654E<br>
+C) G.657A2</p>
+<hr>
+<h3 id="46-icpc-%E0%B8%97%E0%B8%B3%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3">46) ICPC ทำหน้าที่หลักอะไร?</h3>
+<p>A) บอกวิธีทำ Backhaul<br>
+B) ปกป้องเส้นทางสายใต้น้ำ<br>
+C) ควบคุม OSNR</p>
+<hr>
+<h3 id="47-icpc-recommendation-no2-%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3">47) ICPC Recommendation No.2 เกี่ยวข้องกับอะไร?</h3>
+<p>A) การวางสายให้ปลอดภัยจากเรือ<br>
+B) การเลือก modulation<br>
+C) การจ่ายไฟ SEF/BEF</p>
+<hr>
+<h3 id="48-itu-t-g650-%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3">48) ITU-T G.650 เกี่ยวกับอะไร?</h3>
+<p>A) Fiber Measurement<br>
+B) Repeater Gain<br>
+C) PFE Current Regulation</p>
+<hr>
+<h3 id="49-iec-60364-%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3">49) IEC 60364 เกี่ยวข้องกับอะไร?</h3>
+<p>A) Grounding / Earthing<br>
+B) BU Switching<br>
+C) Raman Nonlinear</p>
+<hr>
+<h3 id="50-%E0%B8%97%E0%B8%B3%E0%B9%84%E0%B8%A1%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%88%E0%B8%B6%E0%B8%87%E0%B8%99%E0%B8%B4%E0%B8%A2%E0%B8%A1%E0%B9%83%E0%B8%8A%E0%B9%89-g654e">50) ทำไมสายใต้น้ำจึงนิยมใช้ G.654E?</h3>
+<p>A) Latency ต่ำ<br>
+B) Nonlinear ต่ำ<br>
+C) Loss ต่ำ + Effective Area ใหญ่</p>
+<hr>
+<p><a href="quiz-subsea-answers.md">answers</a></p>
+
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>pfe-power-theory.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<h1 id="%E2%9A%A1-pfe-power-theory-%E2%80%93-from-basic-to-deep-ultimate-edition">⚡ PFE Power Theory – From Basic to Deep (Ultimate Edition)</h1>
+<p>ไฟล์นี้รวมทุกแนวคิดเกี่ยวกับระบบจ่ายไฟใต้น้ำ (Submarine Power Feeding)<br>
+ตั้งแต่พื้นฐาน → วิธีคิด SEF/BEF → Sea Earth → การไหลของกระแสจริง<br>
+→ วงจรสมมติ (Equivalent Circuit) → Fault Behavior</p>
+<p>เป็นไฟล์ที่ครอบคลุมที่สุดสำหรับวิศวกร CLS/Subsea</p>
+<hr>
+<h1 id="1-pfe-%E0%B8%84%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3-basic-overview">1) PFE คืออะไร (Basic Overview)</h1>
+<p>PFE = Power Feeding Equipment<br>
+งานของมันคือ “ส่งกระแสคงที่ (constant current)” ให้ repeater ใต้น้ำทุกตัว</p>
+<ul>
+<li>กระแสใช้งานทั่วไป: <strong>0.8–1.5 A</strong></li>
+<li>แรงดัน: <strong>±1.5 kV ถึง ±10 kV</strong></li>
+<li>ส่งไฟไปตาม <strong>Copper Conductor</strong> ภายในสาย</li>
+<li>ทุก repeater ใช้ไฟจากกระแสนี้ในการขับ <strong>pump laser / control module</strong></li>
+</ul>
+<p>PFE (+) → copper conductor → repeaters → (return path) → PFE (–)</p>
+<hr>
+<h1 id="2-%E0%B9%82%E0%B8%AB%E0%B8%A1%E0%B8%94%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%88%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B9%84%E0%B8%9F-feeding-modes">2) โหมดการจ่ายไฟ (Feeding Modes)</h1>
+<h2 id="%E2%9C%94-sef-%E2%80%93-single-end-feed">✔ SEF – Single-End Feed</h2>
+<p>จ่ายไฟจากฝั่งเดียว → กระแสกลับทางทะเล</p>
+<p>PFE (+) → cable → repeater chain → Sea Return → Sea Earth → PFE (–)</p>
+<p>คุณสมบัติ:</p>
+<ul>
+<li>มี <strong>Sea Earth Current</strong></li>
+<li>ใช้ตอนอีกฝั่งเสียหรือปิดบำรุงรักษา</li>
+<li>ใช้สายสั้น/ระบบในประเทศ</li>
+</ul>
+<hr>
+<h2 id="%E2%9C%94-bef-%E2%80%93-both-end-feed-double-end-feed">✔ BEF – Both-End Feed (Double-End Feed)</h2>
+<p>จ่ายไฟ “สองฝั่ง” เข้าหากันกลางสาย</p>
+<p>PFE A (+) →───►── cable ──◄───← PFE B (–)</p>
+<p>คุณสมบัติ:</p>
+<ul>
+<li>ลดแรงดันรวมต่อฝั่ง ~50%</li>
+<li>กระแสไม่วิ่งลงทะเล → <strong>Sea Earth Current = 0</strong></li>
+<li>ใช้คู่กับสายยาว/ระบบ International เช่น APG</li>
+</ul>
+<hr>
+<h1 id="3-station-earth-vs-sea-earth">3) Station Earth vs Sea Earth</h1>
+<table>
+<thead>
+<tr>
+<th>ชนิด</th>
+<th>หน้าที่</th>
+<th>ใช้ที่ไหน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sea Earth</strong></td>
+<td>คืนกระแส DC (return path) / ตรวจ fault</td>
+<td>น้ำทะเล (shore)</td>
+</tr>
+<tr>
+<td><strong>Station Earth</strong></td>
+<td>กราวด์ป้องกันฟ้าผ่า/อุปกรณ์ CLS</td>
+<td>ตึก CLS</td>
+</tr>
+<tr>
+<td><strong>Earth-Free</strong></td>
+<td>ตัด earth ทั้งหมดออกเพื่อทดสอบ</td>
+<td>PFE test mode</td>
+</tr>
+</tbody>
+</table>
+<p>Sea Earth ไม่ใช่ “กราวด์” แต่เป็น <strong>ส่วนหนึ่งของวงจรไฟฟ้า</strong></p>
+<hr>
+<h1 id="4-%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%84%E0%B8%AB%E0%B8%A5%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B9%81%E0%B8%AA-power-loop-theory">4) การไหลของกระแส (Power Loop Theory)</h1>
+<h2 id="%E0%B8%A7%E0%B8%87%E0%B8%88%E0%B8%A3%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%90%E0%B8%B2%E0%B8%99%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%99%E0%B9%89%E0%B8%B3">วงจรพื้นฐานของระบบใต้น้ำ</h2>
+<p>ให้คิดว่าเป็นวงจร DC ธรรมดาแต่มีความยาวหลายพันกิโล</p>
+<p>ประกอบด้วย:</p>
+<ul>
+<li><strong>R_cable</strong> = ความต้านทานของ conductor</li>
+<li><strong>R_load</strong> = Repeater Chain</li>
+<li><strong>R_seaLoop</strong> = Sea Earth + water resistance</li>
+</ul>
+<p>สมการ:</p>
+<p>V_pfe = I × (R_cable + R_load + R_seaLoop) + Margin</p>
+<p>กระแสต้อง “วิ่งเป็น loop เสมอ” ไม่ว่าจะเป็น SEF หรือ BEF</p>
+<hr>
+<h1 id="5-equivalent-circuit-%E0%B8%A7%E0%B8%87%E0%B8%88%E0%B8%A3%E0%B8%AA%E0%B8%A1%E0%B8%A1%E0%B8%95%E0%B8%B4%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%A5">5) Equivalent Circuit (วงจรสมมติของสายทะเล)</h1>
+<p>เราสามารถเขียนเป็นวงจรแบบนี้:</p>
+<p>PFE (+HV) │ R_cable (distributed along fiber) │ [ R_load = repeater + BU ] │ ├── R_leak (เฉพาะเวลารั่ว) │ (return path) │ Sea Earth → PFE (–HV)</p>
+<p><strong>R_leak</strong> คือจุดรั่วลงทะเล สร้าง Sea Earth Current</p>
+<hr>
+<h1 id="6-sea-earth-current-%E2%80%93-%E0%B9%84%E0%B8%AB%E0%B8%A5%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%84%E0%B8%A3%E0%B9%80%E0%B8%A1%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%A1%E0%B8%B5-fault">6) Sea Earth Current – ไหลอย่างไรเมื่อมี Fault</h1>
+<p>เมื่อ conductor รั่วถึงทะเล:</p>
+<p>ส่วนหนึ่งของ I_feed ไหลลงทะเลที่จุดรั่ว → กลับฝั่งที่ “ระยะสั้นที่สุด”</p>
+<h3 id="%E2%9C%94-%E0%B8%96%E0%B9%89%E0%B8%B2%E0%B8%A3%E0%B8%B1%E0%B9%88%E0%B8%A7%E0%B9%83%E0%B8%81%E0%B8%A5%E0%B9%89-cls-a">✔ ถ้ารั่วใกล้ CLS A</h3>
+<p>SE current กลับ A (เพราะระยะสั้นกว่า)</p>
+<h3 id="%E2%9C%94-%E0%B8%96%E0%B9%89%E0%B8%B2%E0%B8%A3%E0%B8%B1%E0%B9%88%E0%B8%A7%E0%B9%83%E0%B8%81%E0%B8%A5%E0%B9%89-cls-b">✔ ถ้ารั่วใกล้ CLS B</h3>
+<p>SE current กลับ B</p>
+<h3 id="%E2%9C%94-%E0%B8%96%E0%B9%89%E0%B8%B2%E0%B8%A3%E0%B8%B1%E0%B9%88%E0%B8%A7%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%B2%E0%B8%A2">✔ ถ้ารั่วกลางสาย</h3>
+<p>SE current จะไหลไปฝั่งที่ R ต่ำกว่า = ฝั่งใกล้กว่า</p>
+<hr>
+<h1 id="7-fault-behavior-%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%A5%E0%B8%B6%E0%B8%81%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%AA%E0%B8%B8%E0%B8%94-deep-dive">7) Fault Behavior แบบลึกที่สุด (Deep Dive)</h1>
+<h2 id="71-ir-test--%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%8A%E0%B8%B5%E0%B9%89%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%89%E0%B8%99%E0%B8%A7%E0%B8%99">7.1 IR Test = ตัวชี้วัดฉนวน</h2>
+<p>IR ต่ำ → สายเริ่มสูญเสีย → conductor begin to leak</p>
+<h2 id="72-voltage-to-earth">7.2 Voltage-to-Earth</h2>
+<p>ใช้วัดว่า fault อยู่ใกล้ฝั่งไหน<br>
+ฝั่งที่แรงดันตกมากกว่า → ใกล้ fault</p>
+<h2 id="73-earth-current">7.3 Earth Current</h2>
+<p>ค่าที่โหดที่สุดในการตีความ:</p>
+<ul>
+<li><strong>SEF</strong> → มี earth current เสมอ</li>
+<li><strong>BEF</strong> → ต้องเป็น 0 ถ้ารั่ว → จะไม่เป็น 0</li>
+</ul>
+<h2 id="74-fault-%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%B2%E0%B8%A2">7.4 Fault กลางสาย</h2>
+<p>กรณีนี้มีความลึก:</p>
+<ul>
+<li>แม้รั่วกลางสาย แต่ 90% ของ I_SE จะไหลกลับฝั่งที่สั้นกว่า<br>
+→ ทำให้รู้ว่า fault อยู่ “ใกล้ฝั่งไหน”</li>
+</ul>
+<hr>
+<h1 id="8-%E0%B9%80%E0%B8%AB%E0%B8%95%E0%B8%B8%E0%B8%9C%E0%B8%A5%E0%B8%97%E0%B8%B5%E0%B9%88-ui-pfe-%E0%B9%84%E0%B8%A1%E0%B9%88%E0%B8%95%E0%B8%A3%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%A7%E0%B8%87%E0%B8%88%E0%B8%A3%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87">8) เหตุผลที่ UI PFE ไม่ตรงกับวงจรจริง</h1>
+<p>UI แสดงง่าย ๆ แบบ:</p>
+<p>A ———— BU ———— B</p>
+<p>แต่ความจริงมี:</p>
+<ul>
+<li>R distributed</li>
+<li>R_leak</li>
+<li>Sea water loop</li>
+<li>Earth impedance</li>
+<li>Control loads</li>
+<li>Voltage reference</li>
+</ul>
+<p>เพราะงั้นเวลาตีความ fault → ต้องใช้ <strong>logic พื้นฐานไฟฟ้า + knowledge subsea</strong></p>
+<hr>
+<h1 id="9-%E0%B8%AA%E0%B8%A3%E0%B8%B8%E0%B8%9B%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%A3%E0%B8%A7%E0%B8%A1-pfe-%E0%B8%97%E0%B8%B1%E0%B9%89%E0%B8%87%E0%B8%AB%E0%B8%A1%E0%B8%94">9) สรุปภาพรวม PFE ทั้งหมด</h1>
+<ol>
+<li>PFE ส่งกระแสคงที่ให้ repeater</li>
+<li>SEF = return ผ่านทะเล</li>
+<li>BEF = return ผ่าน conductor ทั้งสองฝั่ง</li>
+<li>Sea Earth ไม่ใช่กราวด์ แต่คือ return path</li>
+<li>Fault = conductor leak → I_SE เพิ่ม → IR ลด</li>
+<li>รั่วใกล้ฝั่งไหน → SE current ไหลกลับฝั่งนั้น</li>
+<li>BEF ไม่มี I_SE เว้นแต่เกิด fault</li>
+<li>Equivalent circuit ใช้ในการคำนวณตำแหน่งรั่ว</li>
+<li>นี่คือหัวใจระบบ power ใต้น้ำทั้งหมด</li>
+</ol>
+<hr>
+
+</body>
+</html>

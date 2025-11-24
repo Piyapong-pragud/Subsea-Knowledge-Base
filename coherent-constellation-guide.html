@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>coherent-constellation-guide.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<h1 id="coherent-constellation-guide">Coherent Constellation Guide</h1>
+<p>The constellation diagram is one of the most powerful tools for analyzing<br>
+coherent optical transmission. It visually represents symbols in the complex<br>
+plane and reveals impairments such as noise, dispersion, phase noise, and<br>
+nonlinear effects.</p>
+<p>This guide explains how to read constellations and diagnose common transmission issues.</p>
+<hr>
+<h2 id="%F0%9F%93%98-1-what-is-a-constellation-diagram">📘 1. What Is a Constellation Diagram?</h2>
+<p>A constellation diagram plots received symbols on an <strong>I–Q plane</strong>:</p>
+<ul>
+<li><strong>I</strong> = In-phase component</li>
+<li><strong>Q</strong> = Quadrature component</li>
+</ul>
+<p>Each point represents a received symbol.<br>
+The clarity, spread, shape, and clustering of the points indicate system health.</p>
+<p>I-axis (Real) │ │     •    • │ │     •    • └────────────── Q-axis (Imaginary)</p>
+<hr>
+<h2 id="%F0%9F%93%98-2-ideal-constellations-no-impairments">📘 2. Ideal Constellations (No Impairments)</h2>
+<h3 id="bpsk">BPSK</h3>
+<p>Two points → maximum reach</p>
+<p>•         •</p>
+<h3 id="qpsk-commonly-used-in-submarine-systems">QPSK (commonly used in submarine systems)</h3>
+<p>Four symmetric points</p>
+<p>•    • •    •</p>
+<h3 id="8qam">8QAM</h3>
+<p>•  •  • • •  •  •</p>
+<h3 id="16qam">16QAM</h3>
+<p>•  •  •  • •  •  •  • •  •  •  • •  •  •  •</p>
+<p>Higher-order modulations add more points → higher data rate, lower reach.</p>
+<hr>
+<h2 id="%F0%9F%93%98-3-what-a-good-constellation-looks-like">📘 3. What a Good Constellation Looks Like</h2>
+<p>A healthy coherent channel has:</p>
+<ul>
+<li>Tight clusters</li>
+<li>Clear decision boundaries</li>
+<li>No rotation</li>
+<li>Symmetrical points</li>
+<li>Minimal noise spreading</li>
+</ul>
+<p>Characteristics:</p>
+<p>QPSK example:</p>
+<p>o      o</p>
+<p>o      o</p>
+<hr>
+<h2 id="%F0%9F%93%98-4-impairment-signatures-how-to-read-problems">📘 4. Impairment Signatures (How to Read Problems)</h2>
+<h3 id="%F0%9F%94%B8-a-osnr-degradation-ase-noise">🔸 A) <strong>OSNR Degradation (ASE Noise)</strong></h3>
+<p>Symptoms:</p>
+<ul>
+<li>Points become fuzzy</li>
+<li>Circles spread outward</li>
+<li>Boundaries less defined</li>
+</ul>
+<p>Cause:</p>
+<ul>
+<li>EDFA ASE noise accumulation</li>
+<li>Long subsea repeater chains</li>
+<li>Low launch power</li>
+</ul>
+<p>°   °
+·°° °°·
+°   °</p>
+<p>Interpretation:</p>
+<ul>
+<li>Increase OSNR margin</li>
+<li>Check span loss / pump performance</li>
+<li>Consider lowering modulation order</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%B8-b-phase-noise-lo-laser-or-nonlinear-impact">🔸 B) <strong>Phase Noise (LO laser or nonlinear impact)</strong></h3>
+<p>Symptoms:</p>
+<ul>
+<li>Constellation “rotates” slowly</li>
+<li>Points form circular smears</li>
+</ul>
+<p>°</p>
+<p>°   ° °</p>
+<p>Cause:</p>
+<ul>
+<li>LO linewidth too wide</li>
+<li>Nonlinear phase rotation</li>
+<li>Temperature drift in subsea spans</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%B8-c-chromatic-dispersion-cd">🔸 C) <strong>Chromatic Dispersion (CD)</strong></h3>
+<p>Symptoms:</p>
+<ul>
+<li>Points elongate along one axis</li>
+<li>Often oval-shaped clusters</li>
+</ul>
+<p>•••     ••• •••   •••</p>
+<p>Cause:</p>
+<ul>
+<li>Residual CD not compensated by DSP</li>
+<li>Filtering effect in repeaters / ROADMs</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%B8-d-pmd-polarization-mode-dispersion">🔸 D) <strong>PMD (Polarization Mode Dispersion)</strong></h3>
+<p>Symptoms:</p>
+<ul>
+<li>Two “ghost clusters”</li>
+<li>Split symbols</li>
+<li>Unequal spreading on X/Y pol</li>
+</ul>
+<p>•  •    •  • ••      ••</p>
+<p>Cause:</p>
+<ul>
+<li>PMD accumulated over long fiber</li>
+<li>Rapid polarization changes</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%B8-e-nonlinear-effects-spm--xpm--fwm--raman">🔸 E) <strong>Nonlinear Effects (SPM / XPM / FWM / Raman)</strong></h3>
+<p>Symptoms:</p>
+<ul>
+<li>Radial spreading</li>
+<li>Asymmetrical deformation</li>
+<li>“Smeared” or twisted clusters</li>
+</ul>
+<p>o</p>
+<p>o · o o</p>
+<p>Common subsea causes:</p>
+<ul>
+<li>High launch power</li>
+<li>Tight channel spacing</li>
+<li>Strong WDM loading</li>
+<li>Raman interaction with adjacent carriers</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%B8-f-iq-imbalance--modulator-issues">🔸 F) <strong>IQ Imbalance / Modulator Issues</strong></h3>
+<p>Symptoms:</p>
+<ul>
+<li>Constellation becomes skewed</li>
+<li>Points shift off center</li>
+</ul>
+<p>Cause:</p>
+<ul>
+<li>Automatic calibration failure</li>
+<li>IQ modulator bias drift</li>
+<li>Laser degradation</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%98-5-polarization-constellations-dp-qpsk--dp-16qam">📘 5. Polarization Constellations (DP-QPSK / DP-16QAM)</h2>
+<p>Coherent systems use <strong>dual polarization</strong>, so each channel has <strong>two constellations</strong>:</p>
+<ul>
+<li>X-pol</li>
+<li>Y-pol</li>
+</ul>
+<p>Both should appear symmetric.<br>
+A mismatch indicates PMD, polarization rotation, or XPol noise.</p>
+<hr>
+<h2 id="%F0%9F%93%98-6-practical-examples-from-real-subsea-systems">📘 6. Practical Examples from Real Subsea Systems</h2>
+<h3 id="example-1-clean-qpsk-apg-long-haul">Example 1: Clean QPSK (APG long-haul)</h3>
+<ul>
+<li>Tight clustering</li>
+<li>Light noise</li>
+<li>Stable phase lock</li>
+</ul>
+<p>Expected OSNR: 14–17 dB</p>
+<hr>
+<h3 id="example-2-degraded-qpsk-due-to-ase-accumulation">Example 2: Degraded QPSK due to ASE accumulation</h3>
+<ul>
+<li>Slight halo around clusters</li>
+<li>Constallation still distinguishable</li>
+<li>Light spreading</li>
+</ul>
+<p>Likely causes:</p>
+<ul>
+<li>High span count</li>
+<li>Pump aging</li>
+<li>High cable loss</li>
+</ul>
+<hr>
+<h3 id="example-3-severe-nonlinear-distortion-high-power-case">Example 3: Severe Nonlinear Distortion (High power case)</h3>
+<ul>
+<li>Radial spreading</li>
+<li>Asymmetric</li>
+<li>Constellation looks “exploded”</li>
+</ul>
+<p>Occurs when:</p>
+<ul>
+<li>Launch power too high</li>
+<li>WDM loading too dense</li>
+<li>Long repeater chain</li>
+</ul>
+<hr>
+<h3 id="example-4-phase-noise-instability">Example 4: Phase noise instability</h3>
+<ul>
+<li>Rotation</li>
+<li>Circular clusters</li>
+</ul>
+<p>Often caused by:</p>
+<ul>
+<li>LO laser drift</li>
+<li>Poor thermal stability</li>
+<li>Severe nonlinear interactions</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%98-7-quick-diagnosis-table">📘 7. Quick Diagnosis Table</h2>
+<table>
+<thead>
+<tr>
+<th>Constellation Pattern</th>
+<th>Likely Cause</th>
+<th>Layer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fuzzy, expanded</td>
+<td>Low OSNR</td>
+<td>Optical</td>
+</tr>
+<tr>
+<td>Rotating center</td>
+<td>Phase noise</td>
+<td>DSP/Optical</td>
+</tr>
+<tr>
+<td>Elliptical</td>
+<td>CD residual</td>
+<td>Optical</td>
+</tr>
+<tr>
+<td>Split clusters</td>
+<td>PMD</td>
+<td>Fiber</td>
+</tr>
+<tr>
+<td>Radial explosion</td>
+<td>Nonlinearities</td>
+<td>Power/Optical</td>
+</tr>
+<tr>
+<td>Shifted center</td>
+<td>IQ imbalance</td>
+<td>Transponder</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%93%98-8-why-constellation-monitoring-matters-in-submarine-systems">📘 8. Why Constellation Monitoring Matters in Submarine Systems</h2>
+<p>Submarine coherent systems rely heavily on constellation monitoring because:</p>
+<ul>
+<li>Repeaters introduce ASE noise</li>
+<li>Long spans increase CD and PMD</li>
+<li>Nonlinear effects accumulate over thousands of km</li>
+<li>SLM/PFE events can change optical performance</li>
+<li>Helps prevent uncorrectable FEC events</li>
+<li>Critical for capacity upgrades (100G → 200G)</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%98-9-summary">📘 9. Summary</h2>
+<p>Constellations provide a real-time “visual fingerprint” of channel health.<br>
+By analyzing shape, rotation, spreading, and noise, engineers can quickly identify:</p>
+<ul>
+<li>OSNR issues</li>
+<li>Dispersion problems</li>
+<li>Nonlinearities</li>
+<li>Phase noise</li>
+<li>Hardware faults</li>
+<li>Polarization instability</li>
+</ul>
+<p>In submarine networks, constellation monitoring is essential for maintaining<br>
+long-haul stability, predicting failures, and enabling future upgrades.</p>
+<hr>
+<p>File: coherent-constellation-guide.md
+Category: Optical Transmission Systems</p>
+
+</body>
+</html>

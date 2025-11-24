@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>glossary.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<h1 id="%F0%9F%93%99-subsea-glossary-a%E2%80%93z">📙 Subsea Glossary A–Z</h1>
+<p>รวมศัพท์สำคัญในโลก Submarine Cable (100 คำ)</p>
+<hr>
+<h1 id="%F0%9F%85%B0%EF%B8%8F-a-%E2%80%93-c">🅰️ A – C</h1>
+<h3 id="acr-attenuation-to-crosstalk-ratio"><strong>ACR (Attenuation to Crosstalk Ratio)</strong></h3>
+<p>ค่าความต่างระหว่างสัญญาณหลักและ crosstalk ใช้ประเมินคุณภาพช่องใน DWDM</p>
+<h3 id="ais-alarm-indication-signal"><strong>AIS (Alarm Indication Signal)</strong></h3>
+<p>สัญญาณแจ้งเตือนลิงก์ผิดปกติ เช่น AIS-L, AIS-P</p>
+<h3 id="amplifier-chain"><strong>Amplifier Chain</strong></h3>
+<p>ชุด repeater ที่ต่อเนื่องกันตั้งแต่ CLS → BU → Repeater ทั้งหมด</p>
+<h3 id="apc-automatic-power-control"><strong>APC (Automatic Power Control)</strong></h3>
+<p>ระบบควบคุมกำลังแสงใน repeater ให้คงที่</p>
+<h3 id="armored-cable"><strong>Armored Cable</strong></h3>
+<p>สายใยแก้วนำแสงแบบมีเกราะเหล็ก ใช้ใน near-shore / fishing zone</p>
+<h3 id="ase-noise-amplified-spontaneous-emission"><strong>ASE Noise (Amplified Spontaneous Emission)</strong></h3>
+<p>Noise จาก EDFA ใต้น้ำที่สะสมตาม repeater chain ทำให้ OSNR ลดลง</p>
+<h3 id="back-reflection"><strong>Back Reflection</strong></h3>
+<p>การสะท้อนกลับของสัญญาณในระบบ มีผลต่อ ORL</p>
+<h3 id="bmh-beach-manhole"><strong>BMH (Beach Manhole)</strong></h3>
+<p>จุดขึ้นฝั่งของสาย ใช้ตรวจ OTDR ก่อนเข้าสู่ฝั่ง</p>
+<h3 id="bu-branching-unit"><strong>BU (Branching Unit)</strong></h3>
+<p>อุปกรณ์แยกเส้นทางใต้น้ำ</p>
+<ul>
+<li>APG มี BU หลายจุด</li>
+<li>CSN ใช้แยกสายไปเกาะต่าง ๆ</li>
+</ul>
+<h3 id="capacity-planning"><strong>Capacity Planning</strong></h3>
+<p>การวางแผนอัปเกรดความจุ เช่น 100G → 200G → 400G</p>
+<h3 id="cd-chromatic-dispersion"><strong>CD (Chromatic Dispersion)</strong></h3>
+<p>การกระจายของความเร็วสัญญาณตาม wavelength; coherent ใช้ DSP แก้ได้</p>
+<h3 id="cds-chromatic-dispersion-slope"><strong>CDS (Chromatic Dispersion Slope)</strong></h3>
+<p>อัตราการเปลี่ยนแปลงของ CD ตาม wavelength</p>
+<h3 id="cls-cable-landing-station"><strong>CLS (Cable Landing Station)</strong></h3>
+<p>สถานี landing มี SLTE, PFE, NOC, AC/DC plant</p>
+<h3 id="coherent-transmission"><strong>Coherent Transmission</strong></h3>
+<p>การส่งสัญญาณด้วย QPSK/8QAM/16QAM ระยะไกล ทน OSNR ต่ำได้ดี</p>
+<h3 id="conductivity-fault"><strong>Conductivity Fault</strong></h3>
+<p>ความผิดปกติของ conductor เช่น น้ำเข้าทำให้เกิด ground fault</p>
+<hr>
+<h1 id="%F0%9F%85%B3-d-%E2%80%93-g">🅳 D – G</h1>
+<h3 id="dispersion-compensation"><strong>Dispersion Compensation</strong></h3>
+<p>ระบบชดเชย CD (ยุคเก่าใช้ DCM, ยุคใหม่ใช้ DSP)</p>
+<h3 id="equalization-gain-flatness"><strong>Equalization (Gain Flatness)</strong></h3>
+<p>การปรับกำลังช่องให้เรียบ ใช้ GFF/WSS/ROADM</p>
+<h3 id="edfa-erbium-doped-fiber-amplifier"><strong>EDFA (Erbium-Doped Fiber Amplifier)</strong></h3>
+<p>Repeater ใต้น้ำ: Gain 14–20 dB, อายุ 25–30 ปี</p>
+<h3 id="fiber-attenuation"><strong>Fiber Attenuation</strong></h3>
+<p>ค่า loss ของไฟเบอร์ทั่วไป: 0.17–0.18 dB/km</p>
+<h3 id="flex-grid"><strong>Flex-grid</strong></h3>
+<p>ช่องแบบยืดหยุ่น 12.5 GHz รองรับ superchannel</p>
+<h3 id="fec-forward-error-correction"><strong>FEC (Forward Error Correction)</strong></h3>
+<p>เพิ่มความทนทานต่อ BER</p>
+<ul>
+<li>APG: SD-FEC</li>
+<li>10G: RS(255,239)</li>
+</ul>
+<h3 id="gsnr-generalized-snr"><strong>GSNR (Generalized SNR)</strong></h3>
+<p>ตัวชี้คุณภาพสัญญาณเมื่อรวม nonlinear; QPSK ต้อง ≥ 11 dB</p>
+<h3 id="gff-gain-flattening-filter"><strong>GFF (Gain Flattening Filter)</strong></h3>
+<p>ฟิลเตอร์ปรับ power profile ให้เรียบก่อน/หลัง ROADM</p>
+<h3 id="ground-path-return"><strong>Ground Path Return</strong></h3>
+<p>การคืนกระแสของ PFE ผ่านน้ำทะเล (Single-End Feed)</p>
+<hr>
+<h1 id="%F0%9F%85%B7-h-%E2%80%93-n">🅷 H – N</h1>
+<h3 id="high-voltage-bypass-switch"><strong>High-Voltage Bypass Switch</strong></h3>
+<p>วงจรใน BU/Repeater ใช้ bypass ส่วนที่ชำรุด</p>
+<h3 id="ir-test-insulation-resistance"><strong>IR Test (Insulation Resistance)</strong></h3>
+<p>ทดสอบการรั่วของ conductor; ค่า IR ต่ำ → เสี่ยง ground fault</p>
+<h3 id="joint-undersea-joint"><strong>Joint (Undersea Joint)</strong></h3>
+<p>จุด splice ใต้น้ำหลังทำการซ่อมสาย</p>
+<h3 id="line-coherent-detection"><strong>Line Coherent Detection</strong></h3>
+<p>เทคนิค decode สัญญาณ coherent ด้วย LO laser</p>
+<h3 id="mfd-mode-field-diameter"><strong>MFD (Mode Field Diameter)</strong></h3>
+<p>ขนาดสนามแสงของ fiber มีผลต่อ splice loss</p>
+<h3 id="marine-repair"><strong>Marine Repair</strong></h3>
+<p>ขั้นตอนซ่อมสายทะเล:<br>
+ROV → Cut → Pickup → Joint → Relay → Test</p>
+<h3 id="muxdemux-passive"><strong>MUX/DEMUX (Passive)</strong></h3>
+<p>อุปกรณ์รวม/แยกช่องแบบ fixed grid</p>
+<hr>
+<h1 id="%F0%9F%85%BE%EF%B8%8F-o-%E2%80%93-p">🅾️ O – P</h1>
+<h3 id="oadm-optical-adddrop-multiplexer"><strong>OADM (Optical Add/Drop Multiplexer)</strong></h3>
+<p>เพิ่ม/ดรอปช่องใน BU หรือ ROADM</p>
+<h3 id="opm-optical-power-meter"><strong>OPM (Optical Power Meter)</strong></h3>
+<p>ใช้วัดกำลังช่องทีละ wavelength</p>
+<h3 id="orl-optical-return-loss"><strong>ORL (Optical Return Loss)</strong></h3>
+<p>ค่าการสะท้อนรวม; ค่าดีควร &lt; −40 dB</p>
+<h3 id="otdr"><strong>OTDR</strong></h3>
+<p>วัดตำแหน่ง fault; สายทะเลใช้รุ่น 40–50 dB dynamic range</p>
+<h3 id="osnr-optical-snr"><strong>OSNR (Optical SNR)</strong></h3>
+<p>ตัวชี้วัดคุณภาพสัญญาณ</p>
+<ul>
+<li>QPSK ≥ 14 dB</li>
+<li>10G ≥ 18–23 dB</li>
+</ul>
+<h3 id="pfe-power-feeding-equipment"><strong>PFE (Power Feeding Equipment)</strong></h3>
+<p>จ่ายไฟให้ repeater chain<br>
+±1.5–10 kV / 1.0–1.5 A (APG)</p>
+<h3 id="pilot-tone"><strong>Pilot Tone</strong></h3>
+<p>สัญญาณกำกับ power ใช้ monitor per-channel</p>
+<h3 id="power-budget"><strong>Power Budget</strong></h3>
+<p>คำนวณ gain–loss ทั้งระบบ ก่อนเพิ่มช่องใหม่</p>
+<hr>
+<h1 id="%F0%9F%86%81-r-%E2%80%93-s">🆁 R – S</h1>
+<h3 id="repeater"><strong>Repeater</strong></h3>
+<p>EDFA ใต้น้ำ ระยะ 60–80 km ต่อ 1 ตัว</p>
+<h3 id="roadm"><strong>ROADM</strong></h3>
+<p>สวิตช์ optical แบบ dynamic ใช้ WSS</p>
+<h3 id="rpl-route-position-list"><strong>RPL (Route Position List)</strong></h3>
+<p>รายการพิกัดเส้นทางสายใต้น้ำทั้งหมด</p>
+<h3 id="sdm-space-division-multiplexing"><strong>SDM (Space Division Multiplexing)</strong></h3>
+<p>Multi-core / Multi-fiber pair สำหรับระบบใหม่</p>
+<h3 id="slm-submarine-line-monitoring"><strong>SLM (Submarine Line Monitoring)</strong></h3>
+<p>ตรวจ pump/repeater/BU ผ่าน supervisory channel</p>
+<h3 id="span"><strong>Span</strong></h3>
+<p>ระยะระหว่าง repeater 2 ตัว (50–80 km)</p>
+<h3 id="span-loss"><strong>Span Loss</strong></h3>
+<p>loss ต่อ span (ทั่วไป 9–14 dB)</p>
+<h3 id="superchannel"><strong>Superchannel</strong></h3>
+<p>การรวมหลาย carriers เป็น 1 logical channel เช่น 400G–600G</p>
+<h3 id="surge-protection"><strong>Surge Protection</strong></h3>
+<p>ระบบป้องกันไฟกระชากของ PFE/CLS</p>
+<hr>
+<h1 id="%F0%9F%86%83-t-%E2%80%93-w">🆃 T – W</h1>
+<h3 id="tilt-compensation"><strong>Tilt Compensation</strong></h3>
+<p>แก้ gain tilt ของ spectrum</p>
+<h3 id="trouble-isolation"><strong>Trouble Isolation</strong></h3>
+<p>แยกปัญหาให้ได้ว่าเป็น:<br>
+Wet / Dry / Terrestrial</p>
+<h3 id="tunable-laser"><strong>Tunable Laser</strong></h3>
+<p>Laser ปรับ wavelength ได้ตาม ITU grid</p>
+<h3 id="voltage-standing-wave-vsw"><strong>Voltage Standing Wave (VSW)</strong></h3>
+<p>การสะท้อนใน conductor เมื่อเกิดการสูญเสียผิดปกติ</p>
+<h3 id="wavelength-drift"><strong>Wavelength Drift</strong></h3>
+<p>การลอยของ wavelength จากความร้อน</p>
+<h3 id="wdm--dwdm"><strong>WDM / DWDM</strong></h3>
+<p>หลายช่องในเส้นเดียว (spacing: 50 / 37.5 GHz)</p>
+<h3 id="wss-wavelength-selective-switch"><strong>WSS (Wavelength Selective Switch)</strong></h3>
+<p>สวิตช์ใน ROADM, IL 5–7 dB</p>
+<hr>
+
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>optical-performance.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<h1 id="%F0%9F%94%B5-optical-performance--monitoring">🔵 Optical Performance &amp; Monitoring</h1>
+<p>OSNR / Q-Factor / BER / Constellation / DSP สำหรับระบบใต้น้ำ</p>
+<hr>
+<h1 id="1-osnr-optical-signal-to-noise-ratio">1) OSNR (Optical Signal to Noise Ratio)</h1>
+<p>OSNR คือค่าหลักในการบอกคุณภาพสัญญาณใต้น้ำ</p>
+<h3 id="typical-subsea-values">Typical Subsea Values</h3>
+<table>
+<thead>
+<tr>
+<th>ระบบ</th>
+<th>OSNR Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10G NRZ</td>
+<td>18–23 dB</td>
+</tr>
+<tr>
+<td>100G QPSK</td>
+<td>14–17 dB</td>
+</tr>
+<tr>
+<td>200G 8QAM</td>
+<td>17–18 dB</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="2-q-factor">2) Q-Factor</h1>
+<p>Q = คุณภาพสัญญาณรวมหลัง DSP<br>
+ค่าที่ต่ำแปลว่าใกล้หลุด FEC</p>
+<h3 id="%E0%B8%8A%E0%B9%88%E0%B8%A7%E0%B8%87%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99">ช่วงใช้งาน</h3>
+<ul>
+<li>Q &gt; 6 dB → ปลอดภัย</li>
+<li>Q 4–6 dB → เสี่ยง</li>
+<li>Q &lt; 4 dB → ใกล้ down</li>
+</ul>
+<hr>
+<h1 id="3-ber-bit-error-rate">3) BER (Bit Error Rate)</h1>
+<h3 id="%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%A0%E0%B8%97">ประเภท</h3>
+<ul>
+<li>Pre-FEC BER → ค่าเผื่อก่อนแก้ error</li>
+<li>Post-FEC BER → ต้องเป็น Zero สำหรับ subsea</li>
+</ul>
+<h3 id="target">Target</h3>
+<ul>
+<li>Pre-FEC BER 1e-3 ถึง 1e-2 (สำหรับ QPSK)</li>
+<li>10G NRZ target: &lt; 1e-4</li>
+</ul>
+<hr>
+<h1 id="4-constellation-diagram">4) Constellation Diagram</h1>
+<p>ใช้ดูความนิ่งของจุดโมดูเลชัน</p>
+<table>
+<thead>
+<tr>
+<th>Modulation</th>
+<th>จุดใน Constellation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QPSK</td>
+<td>4 จุด</td>
+</tr>
+<tr>
+<td>8QAM</td>
+<td>8 จุด</td>
+</tr>
+<tr>
+<td>16QAM</td>
+<td>16 จุด</td>
+</tr>
+</tbody>
+</table>
+<p>จุดสั่น → OSNR ต่ำ, pump aging, nonlinear</p>
+<hr>
+<h1 id="5-dsp-digital-signal-processing">5) DSP (Digital Signal Processing)</h1>
+<p>DSP มีหน้าที่:</p>
+<ul>
+<li>CD Compensation</li>
+<li>PMD Compensation</li>
+<li>Carrier Recovery</li>
+<li>Phase Estimation</li>
+<li>Equalization</li>
+<li>Nonlinear Mitigation</li>
+</ul>
+<hr>
+<h1 id="6-optical-tilt--spectrum-flatness">6) Optical Tilt &amp; Spectrum Flatness</h1>
+<h3 id="%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%A7%E0%B8%B1%E0%B8%94">ตัววัด:</h3>
+<ul>
+<li>Per-channel power</li>
+<li>Variation &lt; 1 dB (ดีมาก)</li>
+<li>
+<blockquote>
+<p>2 dB = ต้อง equalize</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h1 id="7-monitoring-dashboard-%E0%B8%84%E0%B9%88%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%84%E0%B8%A7%E0%B8%A3%E0%B8%94%E0%B8%B9">7) Monitoring Dashboard (ค่าที่ควรดู)</h1>
+<ul>
+<li>Launch Power</li>
+<li>Per-channel Power</li>
+<li>Span Loss Drift</li>
+<li>Pump Current</li>
+<li>OSNR</li>
+<li>Q-Factor</li>
+<li>BER</li>
+<li>Constellation stability</li>
+</ul>
+<hr>
+<h1 id="%E0%B8%AA%E0%B8%A3%E0%B8%B8%E0%B8%9B">สรุป</h1>
+<p>Optical Performance คือหัวใจของการตรวจสุขภาพระบบใต้น้ำ<br>
+ต้องดู OSNR/Q/BER + Pump + EDFA chain เพื่อประเมินว่า link ยังดีหรือเสื่อมลง</p>
+<hr>
+
+</body>
+</html>

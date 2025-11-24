@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>rov-operations.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<hr>
+<p>🤖 ROV Operations – Submarine Cable Repair</p>
+<p>Remotely Operated Vehicle (ROV) for Cable Pickup, Inspection &amp; Relay</p>
+<p>ROV คือหัวใจของการซ่อมสายใต้น้ำยุคใหม่ ใช้ในน้ำลึก, น้ำขุ่น, พื้นหิน, หรือพื้นที่ที่ Grapnel ใช้ไม่ได้
+ทุกระบบซ่อมแบบลึกกว่า 1000 m จะต้องใช้ ROV เป็นหลัก</p>
+<hr>
+<p>📌 1) บทบาทของ ROV ในงานซ่อมสายใต้น้ำ</p>
+<p>ROV ทำงานได้หลายอย่างในกระบวนการซ่อม:</p>
+<p>ตรวจหาตำแหน่งสาย (Cable Location)</p>
+<p>ตรวจสายที่เสีย (Damage Inspection)</p>
+<p>เก็บสายขึ้นเรือ (Cable Pickup)</p>
+<p>วาง saddle หรือ grapnel หลังเก็บสาย</p>
+<p>วางสายกลับพื้นทะเล (Cable Relay)</p>
+<p>ทำ Burial (Jetting / Trenching)</p>
+<p>ตรวจสอบหลังซ่อม (Post-Lay Inspection)</p>
+<hr>
+<p>📌 2) ส่วนประกอบของ ROV</p>
+<p>ROV ซ่อมสายใต้น้ำประกอบด้วย:</p>
+<ol>
+<li>กล้อง HD + แสงไฟแรงสูง</li>
+</ol>
+<p>ใช้ดูสาย, BU, repeater, seabed</p>
+<ol start="2">
+<li>Manipulator Arm (แขนจับ)</li>
+</ol>
+<p>ใช้จับสาย / เก็บสายเข้ากับ hook / ตัดสาหร่าย / ลากเบา ๆ</p>
+<ol start="3">
+<li>Cable Pickup Tool</li>
+</ol>
+<p>ชุด hook พิเศษสำหรับเกี่ยวสายบน seabed</p>
+<ol start="4">
+<li>Sonar (For low-visibility)</li>
+</ol>
+<p>ใช้หาสายตอนน้ำขุ่น / มืด</p>
+<ol start="5">
+<li>Jetting Tool</li>
+</ol>
+<p>ใช้พ่นน้ำความดันสูงเพื่อละลายทรายฝังสาย</p>
+<ol start="6">
+<li>Thrusters</li>
+</ol>
+<p>ใบพัดช่วยคุมตำแหน่ง 6 แกน (6-DOF)</p>
+<ol start="7">
+<li>Umbilical Cable</li>
+</ol>
+<p>สายพ่วงไปยังเรือ มี power + fiber control</p>
+<hr>
+<p>📌 3) การตรวจหาตำแหน่งสายด้วย ROV (Cable Location Mode)</p>
+<p>ใช้เมื่อ:</p>
+<p>หลัง electrode พบ fault zone</p>
+<p>Grapnel เกี่ยวไม่ได้</p>
+<p>สายฝังลึกในทราย</p>
+<p>สาย drift ออกจาก RPL</p>
+<p>อุปกรณ์ที่ใช้:</p>
+<p>Sonar</p>
+<p>Camera</p>
+<p>Laser scale</p>
+<p>Magnetometer (บางรุ่นมี)</p>
+<p>ROV จะบินต่ำเหนือพื้นทะเลเพียง 1–2 เมตรเพื่อหาเคเบิล</p>
+<hr>
+<p>📌 4) Cable Pickup – การเก็บสายขึ้นเรือ</p>
+<p>เป็นขั้นตอน ROV ที่สำคัญที่สุดในการซ่อม</p>
+<p>ขั้นตอน:</p>
+<ol>
+<li>
+<p>ROV ค้นหาสาย</p>
+</li>
+<li>
+<p>ใช้ manipulator เกี่ยวสายเข้ากับ pickup hook</p>
+</li>
+<li>
+<p>เชื่อมสายเข้ากับ pickup line ของเรือ</p>
+</li>
+<li>
+<p>เรือดึงสายผ่าน linear cable engine</p>
+</li>
+<li>
+<p>สายขึ้น deck และเข้าสู่ Cable Growth</p>
+</li>
+<li>
+<p>ROV คอยตรวจ tension &amp; path</p>
+</li>
+</ol>
+<hr>
+<p>📌 5) Cutting &amp; Removal (ในบางเคส)</p>
+<p>ถ้าสายเสียหนัก, แตก, หุ้มเกราะพัง:</p>
+<p>ROV อาจใช้ cutting tool ตัดบางส่วน</p>
+<p>ทำความสะอาดพื้นที่เพื่อลากสาย</p>
+<p>หรือเตรียมจุด joint ใน seabed</p>
+<hr>
+<p>📌 6) Burial / Jetting (ฝังสายกลับ)</p>
+<p>หลังวางสายเสร็จ ROV ทำ Burial:</p>
+<p>ใช้ jetting tool พ่นน้ำแรงดันสูง</p>
+<p>กลบสายลึก 0.5–1.5 เมตร</p>
+<p>ใช้ trenching ในพื้นที่ทรายแข็ง</p>
+<p>ตรวจระดับการฝังด้วย sonar</p>
+<hr>
+<p>📌 7) Relay – วางสายกลับบนพื้นทะเล</p>
+<p>เรือปล่อยสายลงแบบควบคุม tension
+ROV ตรวจสอบ:</p>
+<p>จุดสัมผัสพื้น</p>
+<p>ไม่ให้สายพับ (bend radius violation)</p>
+<p>ไม่ให้สายตกเหว (drop-off zone)</p>
+<p>ไม่ให้สายลอยข้ามก้อนหิน</p>
+<p>ขั้นตอน:</p>
+<ol>
+<li>
+<p>เรือปล่อยสายลง</p>
+</li>
+<li>
+<p>ROV ขับตามใกล้ ๆ</p>
+</li>
+<li>
+<p>คอยปรับ alignment</p>
+</li>
+<li>
+<p>Final seabed lay</p>
+</li>
+<li>
+<p>ตรวจแนวทั้งหมดก่อนปิดงาน</p>
+</li>
+</ol>
+<hr>
+<p>📌 8) Post-Lay Inspection (หลังวางสาย)</p>
+<p>ROV ตรวจสอบแนวสายหลังซ่อม:</p>
+<p>ดูตำแหน่งวาง</p>
+<p>ดูความเสียหาย</p>
+<p>ตรวจ burial depth</p>
+<p>ตรวจไม่ให้สายลอย (free span)</p>
+<p>ถ่ายวิดีโอเก็บเป็น evidence</p>
+<p>ไฟล์วิดีโอและ photo logs ส่งให้ผู้ถือระบบ (Consortium / Operator)</p>
+<hr>
+<p>📌 9) ข้อดีของ ROV</p>
+<p>ข้อดี	รายละเอียด</p>
+<p>แม่นยำสูง	หา fault ได้ตรงตำแหน่ง
+ปลอดภัย	ไม่ทำ seabed พังแบบ grapnel
+ใช้ในน้ำลึกมากได้	3000–6000 m
+ถ่ายภาพได้	ใช้ทำรายงาน repair
+Burial ได้	สำคัญสำหรับระบบใกล้ชายฝั่ง</p>
+<hr>
+<p>📌 10) ข้อจำกัด</p>
+<p>ค่าใช้จ่ายสูง</p>
+<p>ใช้เวลาปรับตั้งนาน</p>
+<p>น้ำเชี่ยว / visibility ต่ำอาจทำงานยาก</p>
+<p>Umbilical มีความเสี่ยงพันสิ่งกีดขวาง</p>
+<p>ต้องใช้ทีมเชี่ยวชาญเต็มชุด</p>
+<hr>
+<p>📌 11) Diagram (สามารถเพิ่มรูปได้ภายหลัง)</p>
+<p align="center">
+  <img src="images/rov_inspection.png" width="450">
+</p>
+<hr>
+<p>✔ File Placement</p>
+<p>แนะนำวางใน:</p>
+<p>/Marine &amp; Field Operations
+└── rov-operations.md</p>
+<hr>
+
+</body>
+</html>

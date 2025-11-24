@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>marine-operations.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<h1 id="%F0%9F%9A%A2-marine-operations-%E2%80%93-cable-ship-handbook">🚢 Marine Operations – Cable Ship Handbook</h1>
+<p>คู่มือปฏิบัติการเรือซ่อมสายใต้น้ำแบบครบวงจร<br>
+(ใช้ในระบบ APG / AAG / SMW5 / CSN)</p>
+<hr>
+<h1 id="1-%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%A3%E0%B8%A7%E0%B8%A1%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%97%E0%B8%B3%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B8%AD-submarine-cable-ship">1) ภาพรวมการทำงานเรือ Submarine Cable Ship</h1>
+<p>การทำงานของเรือซ่อมสายมี 3 ภารกิจหลัก:</p>
+<ol>
+<li><strong>ค้นหาตำแหน่งเสีย (Fault Localization &amp; RPL verification)</strong></li>
+<li><strong>เก็บสายขึ้นมาซ่อม (Cut–Pickup–Joint–Relay)</strong></li>
+<li><strong>วางคืนลงทะเล (Layback / Burial / Testing)</strong></li>
+</ol>
+<p>เรือหนึ่งลำต้องมีระบบควบคุม:</p>
+<ul>
+<li>Dynamic Positioning (DP2/DP3)</li>
+<li>Tension Control</li>
+<li>Cable Engine</li>
+<li>Bow Sheave / Stern Sheave</li>
+<li>ROV System</li>
+<li>Navigation + Hazard Avoidance</li>
+</ul>
+<hr>
+<h1 id="2-dynamic-positioning-dp2--dp3">2) Dynamic Positioning (DP2 / DP3)</h1>
+<p>DP คือหัวใจการคุมเรือให้นิ่งเหนือจุดซ่อม</p>
+<h3 id="%F0%9F%94%B9-dp2">🔹 DP2</h3>
+<ul>
+<li>redundant 2 ชุด</li>
+<li>ใช้ทั่วไปใน near-shore repairs</li>
+</ul>
+<h3 id="%F0%9F%94%B9-dp3">🔹 DP3</h3>
+<ul>
+<li>redundancy 3 ชุด</li>
+<li>ใช้เมื่อกระแสลมแรง หรือใน deep sea</li>
+</ul>
+<h3 id="%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C">อุปกรณ์:</h3>
+<ul>
+<li>Thrusters</li>
+<li>Gyro</li>
+<li>GPS</li>
+<li>Doppler</li>
+<li>Motion Reference Unit (MRU)</li>
+</ul>
+<p>DP จะ “ถือจุดซ่อม” ให้เรือไม่ลอยหนีระหว่างลากสาย</p>
+<hr>
+<h1 id="3-grapnel-run-%E0%B8%A5%E0%B8%B2%E0%B8%81%E0%B9%80%E0%B8%AB%E0%B8%A5%E0%B9%87%E0%B8%81%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B8%AD%E0%B8%A2%E0%B9%80%E0%B8%AA%E0%B8%B5%E0%B8%A2">3) Grapnel Run (ลากเหล็กหารอยเสีย)</h1>
+<p>ก่อนใช้ ROV จะต้อง <strong>ลาก grapnel</strong> เพื่อตัดสิ่งเกาะสาย เช่น:</p>
+<ul>
+<li>อวน</li>
+<li>สมอ</li>
+<li>Debris</li>
+<li>Fishing wire</li>
+</ul>
+<h3 id="%E0%B8%8A%E0%B8%99%E0%B8%B4%E0%B8%94%E0%B8%82%E0%B8%AD%E0%B8%87-grapnel">ชนิดของ grapnel</h3>
+<table>
+<thead>
+<tr>
+<th>Grapnel Type</th>
+<th>ใช้ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SCS (Sandline Cutting Grapnel)</strong></td>
+<td>ตัดอวน/สาย</td>
+</tr>
+<tr>
+<td><strong>Flatfish</strong></td>
+<td>เก็บวัตถุเล็ก ๆ</td>
+</tr>
+<tr>
+<td><strong>Double Hook</strong></td>
+<td>ตะขอสองตัว ลากเกี่ยวสาย</td>
+</tr>
+<tr>
+<td><strong>Gifford Grapnel</strong></td>
+<td>ใช้ในพื้นแข็ง/rocky area</td>
+</tr>
+</tbody>
+</table>
+<p>ระยะลากปกติ: <strong>500–1500 เมตร</strong><br>
+จนกว่าจะ clean พื้นที่ซ่อม</p>
+<hr>
+<h1 id="4-rov-operation-%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AB%E0%B8%B8%E0%B9%88%E0%B8%99%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%99%E0%B9%89%E0%B8%B3">4) ROV Operation (งานหุ่นยนต์ใต้น้ำ)</h1>
+<p>หลัง grapnel เคลียร์แล้ว → ปล่อย <strong>ROV</strong> ลงน้ำ</p>
+<p>ROV ใช้สำหรับ:</p>
+<ul>
+<li>ระบุตำแหน่งสาย</li>
+<li>ตรวจร่องลึก/สันทราย</li>
+<li>ตรวจสภาพสาย</li>
+<li>ตัดสาย (ด้วย cutter)</li>
+<li>ดึงสายเข้าบนเรือ</li>
+</ul>
+<h3 id="%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%9A%E0%B8%99-rov">อุปกรณ์บน ROV</h3>
+<ul>
+<li>Sonar</li>
+<li>Multi-beam</li>
+<li>HD Camera</li>
+<li>Manipulator arm</li>
+<li>Cable cutter</li>
+<li>Lighting system</li>
+</ul>
+<p>ROV ลงได้ลึก <strong>3000–6000 m</strong></p>
+<hr>
+<h1 id="5-%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%B1%E0%B8%94%E0%B8%AA%E0%B8%B2%E0%B8%A2-cut-operation">5) การตัดสาย (Cut Operation)</h1>
+<p>เมื่อเจอสาย:</p>
+<ol>
+<li>ROV ใช้ cutter → ตัดสาย</li>
+<li>ROV ใช้ hook → ยกปลายสายขึ้น</li>
+<li>ใช้ rope messenger → ดึงเข้าระบบ cable engine</li>
+<li>วางปลายแรกบน deck → secure</li>
+<li>ทำเหมือนเดิมกับปลายอีกด้าน</li>
+</ol>
+<p>ผลลัพธ์:<br>
+พี่จะมี <strong>สาย 2 ปลายบนเรือ</strong> พร้อมซ่อม</p>
+<hr>
+<h1 id="6-pickup-%E2%80%93-splicing-%E2%80%93-jointing">6) Pickup – Splicing – Jointing</h1>
+<p>ขั้นตอนหลักของการซ่อมคือการทำ <strong>Joint (UJ/UC/UQJ)</strong></p>
+<h3 id="%E0%B8%82%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%AD%E0%B8%99">ขั้นตอน:</h3>
+<ol>
+<li>Strip ชั้นเกราะ</li>
+<li>เชื่อมสายทองแดง (copper splice)</li>
+<li>เชื่อมใยแก้ว (fiber splice)</li>
+<li>ทดสอบ OTDR</li>
+<li>ประกอบเป็น Joint Housing</li>
+<li>Pressure Test (น้ำลึกจำลอง)</li>
+<li>ทำ marking</li>
+</ol>
+<p>ใช้เวลาเฉลี่ย <strong>8–14 ชั่วโมง / 1 joint</strong></p>
+<hr>
+<h1 id="7-relay--layback-operation">7) Relay &amp; Layback Operation</h1>
+<p>หลังซ่อมเสร็จ:</p>
+<ol>
+<li>วางสายใหม่ลงทีละช่วง</li>
+<li>ควบคุม tension (ต้องคงที่ประมาณ 5–15 ton)</li>
+<li>ใช้ DP ทำเส้นทาง back to RPL</li>
+<li>ใช้ ROV เช็ค alignment</li>
+<li>ทำ layback ให้ตรง route</li>
+</ol>
+<hr>
+<h1 id="8-cable-burial-%E0%B8%9D%E0%B8%B1%E0%B8%87%E0%B8%81%E0%B8%A5%E0%B8%9A">8) Cable Burial (ฝังกลบ)</h1>
+<p>ใกล้ฝั่งหลายประเทศบังคับให้ <strong>ฝังกลบ 1–3 m</strong></p>
+<p>อุปกรณ์ที่ใช้:</p>
+<ul>
+<li>Sea plough</li>
+<li>ROV jetting tool</li>
+<li>Water jet system</li>
+</ul>
+<p>Burial ป้องกัน:</p>
+<ul>
+<li>Anchor drag</li>
+<li>Fishing trawl</li>
+<li>Abrasion</li>
+</ul>
+<hr>
+<h1 id="9-marine-hazard-management">9) Marine Hazard Management</h1>
+<p>ระหว่างปฏิบัติงาน ต้องระวัง:</p>
+<ul>
+<li>Fishing vessel</li>
+<li>Tanker</li>
+<li>Offshore rigs</li>
+<li>Subsea pipeline</li>
+<li>Seamount / Reef</li>
+<li>Restricted zones</li>
+</ul>
+<p>เรือใช้:</p>
+<ul>
+<li>AIS</li>
+<li>Radar</li>
+<li>Marine chart</li>
+<li>ICPC hazard map</li>
+</ul>
+<p>เพื่อหลีกเลี่ยงความเสียหายซ้ำ</p>
+<hr>
+<h1 id="10-repair-timeline-%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%AA%E0%B8%B2%E0%B8%A2-apg">10) Repair Timeline (ตัวอย่างสาย APG)</h1>
+<table>
+<thead>
+<tr>
+<th>ขั้นตอน</th>
+<th>เวลาเฉลี่ย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mobilization</td>
+<td>3–6 วัน</td>
+</tr>
+<tr>
+<td>Transit</td>
+<td>2–7 วัน</td>
+</tr>
+<tr>
+<td>Grapnel Run</td>
+<td>1–3 วัน</td>
+</tr>
+<tr>
+<td>ROV Operation</td>
+<td>1–2 วัน</td>
+</tr>
+<tr>
+<td>Cut + Pickup</td>
+<td>1 วัน</td>
+</tr>
+<tr>
+<td>Joint</td>
+<td>1–2 วัน</td>
+</tr>
+<tr>
+<td>Layback</td>
+<td>1–2 วัน</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>0.5–1 วัน</td>
+</tr>
+</tbody>
+</table>
+<p>รวม 10–20 วันต่อการซ่อม 1 fault</p>
+<hr>
+<h1 id="11-%E0%B8%AA%E0%B8%A3%E0%B8%B8%E0%B8%9B">11) สรุป</h1>
+<p>ไฟล์นี้ครอบคลุมงานเรือทั้งหมด ตั้งแต่การค้นหา ตัด เก็บ เชื่อม และวางสาย<br>
+เหมาะสำหรับ:</p>
+<ul>
+<li>CLS Engineers</li>
+<li>NOC</li>
+<li>Marine coordinators</li>
+<li>Subsea trainees</li>
+</ul>
+<p>ให้เข้าใจ “ภาพใหญ่ของงานซ่อม” อย่างทะลุปรุโปร่ง</p>
+<hr>
+
+</body>
+</html>

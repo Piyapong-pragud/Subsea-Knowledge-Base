@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>optical-calculator.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%94%A2-optical--power-budget-calculator-subsea-edition">🔢 Optical &amp; Power Budget Calculator (Subsea Edition)</h1>
+<p>เครื่องมือคำนวณ Link Budget / OSNR / Voltage / Current สำหรับระบบใต้น้ำ<br>
+รองรับระบบ APG / AAE-1 / CSN และสาย domestic</p>
+<hr>
+<h1 id="1-osnr-calculator-%E0%B8%95%E0%B9%88%E0%B8%AD%E0%B8%8A%E0%B9%88%E0%B8%AD%E0%B8%87">1) OSNR Calculator (ต่อช่อง)</h1>
+<p>สูตรพื้นฐานสำหรับระบบ Coherent:</p>
+<p>OSNR(dB) = Pch(dBm) – NF(dB) – 10·log10(Nspans)</p>
+<h3 id="%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B9%81%E0%B8%9B%E0%B8%A3">ตัวแปร:</h3>
+<ul>
+<li><strong>Pch</strong> = Launch power per channel</li>
+<li><strong>NF</strong> = Noise figure ของ repeater (5.5–6.5 dB)</li>
+<li><strong>Nspans</strong> = จำนวน span (repeater count)</li>
+</ul>
+<h3 id="%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87-apg">ตัวอย่าง APG:</h3>
+<ul>
+<li>Pch = 0 dBm</li>
+<li>NF = 6.0 dB</li>
+<li>Nspans = 92</li>
+</ul>
+<p>OSNR ≈ 0 – 6 – 19.6 = -25.6 dB (ก่อน FEC normalization)</p>
+<p>หลัง normalize (0.1 nm BW):</p>
+<p>≈ <strong>15–16 dB</strong> → เพียงพอสำหรับ QPSK</p>
+<hr>
+<h1 id="2-launch-power-recommendation">2) Launch Power Recommendation</h1>
+<table>
+<thead>
+<tr>
+<th>ระบบ</th>
+<th>Launch Power ที่แนะนำ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10G NRZ</td>
+<td>-2 ถึง +2 dBm</td>
+</tr>
+<tr>
+<td>100G QPSK</td>
+<td>-1 ถึง +1 dBm</td>
+</tr>
+<tr>
+<td>200G 8QAM</td>
+<td>-3 ถึง -1 dBm</td>
+</tr>
+<tr>
+<td>400G (new)</td>
+<td>-5 ถึง -3 dBm</td>
+</tr>
+</tbody>
+</table>
+<p>Subsea มักใช้ <strong>0 dBm ± 0.5</strong> เพื่อควบคุม nonlinear</p>
+<hr>
+<h1 id="3-span-loss-calculator">3) Span Loss Calculator</h1>
+<p>Span Loss = Distance(km) × Fiber Attenuation(dB/km) + Splice Loss</p>
+<p>ค่าอ้างอิง:</p>
+<ul>
+<li>Attenuation = 0.17–0.18 dB/km</li>
+<li>Splice = 0.05–0.1 dB / splice</li>
+<li>Wet splice ≈ 0.3 dB</li>
+</ul>
+<h3 id="%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87">ตัวอย่าง:</h3>
+<p>Span = 72 km<br>
+Fib. att = 0.17 dB/km</p>
+<p>Loss = 72 × 0.17 = 12.24 dB</p>
+<p>Repeater gain ต้องสูงกว่า 12.5–13 dB</p>
+<hr>
+<h1 id="4-total-link-attenuation-chain">4) Total Link Attenuation (Chain)</h1>
+<p>Total Loss = Σ(Span Loss) + Σ(Splice Loss) + BU Loss</p>
+<p>BU Loss:</p>
+<ul>
+<li>0.3–0.7 dB/pass</li>
+<li>Undersea ROADM (rare) = 3–6 dB</li>
+</ul>
+<hr>
+<h1 id="5-repeater-gain-requirement">5) Repeater Gain Requirement</h1>
+<p>Gain Required = Span Loss + Margin
+Margin = 1–2 dB</p>
+<hr>
+<h1 id="6-power-budget-calculator-%E0%B8%A3%E0%B8%A7%E0%B8%A1%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%99%E0%B9%89%E0%B8%B3">6) Power Budget Calculator (รวมสายใต้น้ำ)</h1>
+<p>OSNR_total = OSNR_span – 10·log10(Nspans)</p>
+<h3 id="%E0%B8%84%E0%B9%88%E0%B8%B2-recommended-osnr">ค่า Recommended OSNR:</h3>
+<table>
+<thead>
+<tr>
+<th>Modulation</th>
+<th>OSNR (dB)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QPSK</td>
+<td>≥14 dB</td>
+</tr>
+<tr>
+<td>8QAM</td>
+<td>≥17 dB</td>
+</tr>
+<tr>
+<td>16QAM</td>
+<td>≥21 dB</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="7-pfe-voltage-calculator">7) PFE Voltage Calculator</h1>
+<p>แรงดันรวมที่ต้องใช้บน conductor:</p>
+<p>V_total = (I × R_total) + V_repeaters + Margin</p>
+<h3 id="%E0%B8%84%E0%B9%88%E0%B8%B2%E0%B8%AD%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%AD%E0%B8%B4%E0%B8%87">ค่าอ้างอิง:</h3>
+<ul>
+<li>I = 0.8–1.5 A</li>
+<li>R (copper) = 1.4–1.7 Ω/km</li>
+<li>V per repeater = 40–70 V</li>
+</ul>
+<h3 id="%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87-apg">ตัวอย่าง APG:</h3>
+<p>Distance = 3000 km<br>
+R = 1.5 Ω/km → R_total = 4500 Ω<br>
+I = 1.0 A<br>
+Repeaters = 90<br>
+V_rep = 50 V</p>
+<p>Voltage = (1 × 4500) + (90 × 50) = 9000 V
+Margin 500–1500 V</p>
+<p>รวม <strong>≈ 10–11 kV</strong><br>
+ตรงกับค่าจริงใน APG</p>
+<hr>
+<h1 id="8-sea-earth-return-current-sef-mode">8) Sea Earth Return Current (SEF Mode)</h1>
+<p>I_earth = I_feed (ในระบบ SEF)</p>
+<p>ดูได้จาก PFE → Earth Current Meter<br>
+ค่าปกติ:</p>
+<ul>
+<li>0.95–1.05 A (stable link)</li>
+<li>ถ้าต่างจาก feed current → มี leakage or ground fault</li>
+</ul>
+<hr>
+<h1 id="9-nonlinear-threshold-calculator">9) Nonlinear Threshold Calculator</h1>
+<p>สูตรประเมิน:</p>
+<p>Penalty ≈ 10·log10(1 + (Pch / P_th)^2)</p>
+<p>ค่า P_th เฉลี่ย:</p>
+<ul>
+<li>QPSK → +1.0 dBm</li>
+<li>8QAM → -1.0 dBm</li>
+<li>16QAM → -3.0 dBm</li>
+</ul>
+<hr>
+<h1 id="10-recommended-monitoring-table-%E0%B8%AA%E0%B8%B3%E0%B8%AB%E0%B8%A3%E0%B8%B1%E0%B8%9A-cls">10) Recommended Monitoring Table (สำหรับ CLS)</h1>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>ช่วงค่าปกติ</th>
+<th>อันตราย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Launch Power</td>
+<td>0 ± 0.5 dBm</td>
+<td>&gt; ±1 dB</td>
+</tr>
+<tr>
+<td>Span Loss Drift</td>
+<td>&lt; 0.03 dB/ปี</td>
+<td>&gt; 0.1 dB/ปี</td>
+</tr>
+<tr>
+<td>Pump Current</td>
+<td>±5%</td>
+<td>&gt; ±10%</td>
+</tr>
+<tr>
+<td>OSNR</td>
+<td>≥14 dB</td>
+<td>&lt; 12 dB</td>
+</tr>
+<tr>
+<td>Earth Current (SEF)</td>
+<td>= Feed</td>
+<td>แตกต่าง &gt;0.05 A</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="11-%E0%B8%AA%E0%B8%A3%E0%B8%B8%E0%B8%9B">11) สรุป</h1>
+<p>ไฟล์นี้รวมชุดสูตร + ค่าอ้างอิง เพื่อคำนวณคุณภาพระบบใต้น้ำ<br>
+เหมาะสำหรับ:</p>
+<ul>
+<li>CLS Engineer</li>
+<li>Optical planner</li>
+<li>ผู้วางแผนเพิ่มช่อง (capacity upgrade)</li>
+<li>ผู้ตรวจสุขภาพลิงก์รายปี</li>
+</ul>
+<p>ใช้ร่วมกับไฟล์อื่นในหมวด<br>
+<strong>Optical &amp; Transmission</strong><br>
+เพื่อทำให้วิเคราะห์ระบบได้ครบทั้ง chain</p>
+<hr>
+
+</body>
+</html>

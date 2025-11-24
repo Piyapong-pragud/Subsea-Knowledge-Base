@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>pfe-power-grounding.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<h1 id="%F0%9F%9F%A7-pfe-%E2%80%93-fault--slm-diagnostics">🟧 PFE – Fault &amp; SLM Diagnostics</h1>
+<p>คู่มือการตรวจ Fault, Earth Leakage และการอ่าน Supervisory สำหรับระบบสายใต้น้ำ</p>
+<hr>
+<h1 id="1-pfe-fault-diagnostics-%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AB%E0%B8%B2%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%9C%E0%B8%B4%E0%B8%94%E0%B8%9B%E0%B8%81%E0%B8%95%E0%B8%B4%E0%B8%82%E0%B8%AD%E0%B8%87-pfe">1) PFE Fault Diagnostics (การตรวจหาความผิดปกติของ PFE)</h1>
+<hr>
+<h2 id="%F0%9F%94%A5-ground-fault">🔥 Ground Fault</h2>
+<h3 id="%E0%B8%AD%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A3">อาการ:</h3>
+<ul>
+<li>กระแสไหลลง Sea Earth ผิดปกติ</li>
+<li>ค่า IR (Insulation Resistance) ต่ำ</li>
+<li>Voltage drift</li>
+<li>Earth current ไม่เป็นศูนย์แม้ใน BEF</li>
+</ul>
+<h3 id="%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88">วิธีตรวจ:</h3>
+<ul>
+<li>IR Test จาก PFE</li>
+<li>แยกฝ่ายด้วย Sectionalizing Test</li>
+<li>สังเกต Earth Current Trend</li>
+<li>ตรวจแรงดันจากแต่ละฝั่ง SEF / BEF</li>
+</ul>
+<h3 id="%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2">ความหมาย:</h3>
+<p>Ground fault มักเกิดจาก</p>
+<ul>
+<li>น้ำเข้าชั้น conductor</li>
+<li>Joint เก่าเริ่มเสื่อม</li>
+<li>ความเสียหายจาก anchor/dragging</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%94%A5-current-imbalance">🔥 Current Imbalance</h2>
+<h3 id="%E0%B8%AD%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A3">อาการ:</h3>
+<p>ใน BEF โหมด → กระแสฝั่ง A ≠ กระแสฝั่ง B</p>
+<h3 id="%E0%B8%AA%E0%B8%B2%E0%B9%80%E0%B8%AB%E0%B8%95%E0%B8%B8%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%99%E0%B9%84%E0%B8%9B%E0%B9%84%E0%B8%94%E0%B9%89">สาเหตุที่เป็นไปได้:</h3>
+<ul>
+<li>BU เสียบางส่วน</li>
+<li>Repeater aging / pump fail</li>
+<li>Conductor resistance เปลี่ยน</li>
+<li>มี leakage บาง segment</li>
+</ul>
+<h3 id="%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88">วิธีตรวจ:</h3>
+<ul>
+<li>เปรียบเทียบ Current Telemetry</li>
+<li>ตรวจ Voltage Drop แต่ละฝั่ง</li>
+<li>ตรวจจาก SLM ว่ามี repeater ใดตอบสนองผิดปกติ</li>
+</ul>
+<hr>
+<h1 id="2-slm-submarine-line-monitoring">2) SLM (Submarine Line Monitoring)</h1>
+<p>ระบบ Supervisory เฝ้าระวังสายใต้น้ำผ่าน Optical Supervisory Channel (OSC)</p>
+<hr>
+<h2 id="%F0%9F%93%A1-%E0%B8%AA%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B8%97%E0%B8%B5%E0%B9%88-slm-%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B9%84%E0%B8%94%E0%B9%89">📡 สิ่งที่ SLM ตรวจได้:</h2>
+<ul>
+<li>Repeater status</li>
+<li>Pump current / pump power</li>
+<li>BU switching state</li>
+<li>Span loss trend</li>
+<li>Earth leakage trend</li>
+<li>Aging margin</li>
+<li>Fault location (คร่าว ๆ)</li>
+<li>Communication loss / degraded repeater</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%89-%E0%B8%84%E0%B9%88%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%95%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%A3%E0%B8%B0%E0%B8%A7%E0%B8%B1%E0%B8%87">📉 ค่าที่ต้องระวัง:</h2>
+<ul>
+<li>Pump current สูงผิดปกติ</li>
+<li>Pump power ตกลงต่อเนื่อง (pump aging)</li>
+<li>Repeater ไม่ตอบสนอง (communication fail)</li>
+<li>BU report error</li>
+<li>Margin ลดลงเกิน 0.3–0.5 dB ต่อปี</li>
+</ul>
+<hr>
+<h1 id="3-fault-scenarios-%E0%B8%AA%E0%B8%96%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%93%E0%B9%8C-fault-%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%9E%E0%B8%9A%E0%B8%9A%E0%B9%88%E0%B8%AD%E0%B8%A2">3) Fault Scenarios (สถานการณ์ fault ที่พบบ่อย)</h1>
+<hr>
+<h3 id="a-partial-ground-fault"><strong>A) Partial Ground Fault</strong></h3>
+<ul>
+<li>IR ลดลงแต่ยังไม่ลัดเต็มที่</li>
+<li>Earth current มีแต่ไม่ถึงกับ trip</li>
+<li>ต้องเฝ้าจับตาเป็นเดือน ๆ</li>
+</ul>
+<h3 id="b-full-ground-fault"><strong>B) Full Ground Fault</strong></h3>
+<ul>
+<li>กระแสลงทะเลทันที</li>
+<li>แรงดัน collapse</li>
+<li>ระบบดับหรือ ALARM รุนแรง</li>
+<li>ต้อง repair</li>
+</ul>
+<h3 id="c-conductor-break"><strong>C) Conductor Break</strong></h3>
+<ul>
+<li>ความต้านทานขึ้นสูงมาก</li>
+<li>แรงดันต้องเพิ่มขึ้นถึงขีดจำกัด</li>
+<li>Repeater ตายเป็นช่วง ๆ</li>
+</ul>
+<h3 id="d-pump-fail-edfa"><strong>D) Pump Fail (EDFA)</strong></h3>
+<ul>
+<li>OSNR ตก</li>
+<li>Margin ลด</li>
+<li>SLM แจ้ง pump current/power anomaly</li>
+</ul>
+<hr>
+<h1 id="4-flow-diagram-%E2%80%93-fault-isolation">4) Flow Diagram – Fault Isolation</h1>
+<p>PFE Alarm Detected
+↓
+Check Earth Current
+↓
+Is IR low?
+↓ ↓
+YES NO
+↓ ↓
+Ground Fault Check Current Imbalance
+↓ ↓
+Sectionalize Compare A/B Current
+↓ ↓
+Identify Fault Segment Abnormal? → BU/Repeater suspected</p>
+<hr>
+<h1 id="5-slm-supervisory-path-diagram-text">5) SLM Supervisory Path Diagram (Text)</h1>
+<p>CLS A → SLTE A
+→ Supervisory Laser
+→ Wet Plant
+→ Repeaters (telemetry hop-by-hop)
+→ BU
+→ Repeaters
+→ SLTE B → CLS B</p>
+<hr>
+<h1 id="6-%E0%B8%84%E0%B9%88%E0%B8%B2%E0%B8%9B%E0%B8%81%E0%B8%95%E0%B8%B4%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%84%E0%B8%A7%E0%B8%A3%E0%B8%88%E0%B8%B3-typical-values">6) ค่าปกติที่ควรจำ (Typical Values)</h1>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Typical</th>
+<th>หมายเหตุ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PFE Current</td>
+<td>0.8–1.5 A</td>
+<td>APG ใช้ ~1.0 A</td>
+</tr>
+<tr>
+<td>Voltage</td>
+<td>±1.5–10 kV</td>
+<td>แล้วแต่ระยะ total</td>
+</tr>
+<tr>
+<td>Repeater Gain</td>
+<td>14–20 dB</td>
+<td>ต่อ span</td>
+</tr>
+<tr>
+<td>IR</td>
+<td>&gt; 50 MΩ</td>
+<td>ต่ำกว่าเสี่ยง</td>
+</tr>
+<tr>
+<td>OSNR Degradation</td>
+<td>&lt; 0.2 dB/ปี</td>
+<td>aging</td>
+</tr>
+<tr>
+<td>Pump Current Drift</td>
+<td>1–5% ต่อปี</td>
+<td>ผิดกว่านี้คือเตือน</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="%E0%B8%AA%E0%B8%A3%E0%B8%B8%E0%B8%9B">สรุป</h1>
+<p>ไฟล์นี้ครอบคลุม:</p>
+<ul>
+<li>Fault detection (IR, Earth Current, Voltage)</li>
+<li>Repeater &amp; BU diagnosis</li>
+<li>SLM interpretation</li>
+<li>Fault trend prediction</li>
+</ul>
+<p>ใช้ร่วมกับ Phase 2 และ Phase 3 จะเข้าใจระบบทั้งภาพรวมและภาพลึกของสายใต้น้ำได้สมบูรณ์ที่สุด</p>
+<hr>
+
+</body>
+</html>
