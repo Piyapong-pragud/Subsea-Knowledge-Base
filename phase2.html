@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>phase2.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p><a href="index.html" style="text-decoration:none; font-size:16px; color:#0066da;">? Back to Home</a></p>
+<h1 id="%F0%9F%9F%A7-phase-2-%E2%80%93-intermediate-%E0%B8%A3%E0%B8%B0%E0%B8%94%E0%B8%B1%E0%B8%9A%E0%B8%9B%E0%B8%8F%E0%B8%B4%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A7%E0%B8%B4%E0%B8%A8%E0%B8%A7%E0%B8%81%E0%B8%A3%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%AA%E0%B8%99%E0%B8%B2%E0%B8%A1">🟧 Phase 2 – Intermediate (ระดับปฏิบัติการ/วิศวกรภาคสนาม)</h1>
+<p>เข้าใจเชิงลึกมากขึ้น และสามารถนำไปใช้งานจริงใน CLS ได้</p>
+<hr>
+<h1 id="a-pfe-%E0%B9%80%E0%B8%8A%E0%B8%B4%E0%B8%87%E0%B8%A5%E0%B8%B6%E0%B8%81-advanced-power-feeding">A) PFE เชิงลึก (Advanced Power Feeding)</h1>
+<hr>
+<h2 id="1-%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%B3%E0%B8%99%E0%B8%A7%E0%B8%93%E0%B9%81%E0%B8%A3%E0%B8%87%E0%B8%94%E0%B8%B1%E0%B8%99%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B9%81%E0%B8%AA-submarine-cable-dc-feeding">1) การคำนวณแรงดันและกระแส (Submarine Cable DC Feeding)</h2>
+<p>สูตรพื้นฐานของระบบจ่ายไฟสายใต้น้ำ:</p>
+<p>[
+V = I \times R_{\text{total}} + \text{margin}
+]</p>
+<ul>
+<li><strong>I</strong> = กระแสคงที่ (0.8–1.5 A)</li>
+<li><strong>R_total</strong> = ความต้านทานรวม (Ω/km × ระยะทาง)</li>
+<li><strong>Margin</strong> = aging, temperature, pump drift, repeaters loss</li>
+</ul>
+<h3 id="%F0%9F%94%B8-%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%88%E0%B8%B2%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A-apg">🔸 ตัวอย่างจากระบบ APG</h3>
+<ul>
+<li>Current: <strong>1.0 A</strong></li>
+<li>Resistance: <strong>~1.5 Ω/km</strong></li>
+<li>ระยะ 300 km → R ≈ <strong>450 Ω</strong></li>
+<li>Voltage ≈ <strong>450 V + margin 100–200 V</strong></li>
+</ul>
+<p>แต่ระบบจริงใช้แรงดันระดับ<br>
+→ <strong>±1.5 kV ถึง ±2 kV</strong><br>
+(เพราะรวม repeater chain ที่ยาวหลายพันกิโลเมตร)</p>
+<hr>
+<h2 id="2-fault-handling-%E0%B8%82%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B8%AA%E0%B8%B9%E0%B8%87%E0%B9%83%E0%B8%99-pfe">2) Fault Handling ขั้นสูงใน PFE</h2>
+<hr>
+<h3 id="%F0%9F%94%A5-ground-fault">🔥 Ground Fault</h3>
+<ul>
+<li>ตัวนำแตะน้ำทะเล → เกิด leakage</li>
+<li>มี <strong>Earth current</strong> ไหลกลับ</li>
+<li>ตรวจโดย:
+<ul>
+<li>Insulation Resistance (IR test)</li>
+<li>สังเกต Earth current drift</li>
+<li>Sectionalizing tests แยกฝั่ง</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="%F0%9F%94%A5-current-imbalance">🔥 Current Imbalance</h3>
+<ul>
+<li>กระแสสองด้านของระบบ BEF ไม่เท่ากัน</li>
+<li>บอกได้ว่า:
+<ul>
+<li>BU เสีย</li>
+<li>Repeater เสีย</li>
+<li>Fault ที่ conductor</li>
+</ul>
+</li>
+<li>ใช้ <strong>PFE telemetry</strong> ตรวจ real-time</li>
+</ul>
+<hr>
+<h1 id="b-optical-transmission-dwdm-osnr-equalization">B) Optical Transmission (DWDM, OSNR, Equalization)</h1>
+<hr>
+<h2 id="1-dwdm-channel-management">1) DWDM Channel Management</h2>
+<p>สิ่งที่ต้องจัดการ:</p>
+<ul>
+<li>Channel spacing (50 GHz / 37.5 GHz / Flex-grid)</li>
+<li>Channel plan</li>
+<li>Launch power</li>
+<li>Per-channel attenuation</li>
+<li>Nonlinear limit</li>
+<li>Equalization</li>
+</ul>
+<h3 id="%F0%9F%94%B9-%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87-%E2%80%93-apg">🔹 ตัวอย่าง – APG</h3>
+<ul>
+<li>Coherent 100G / 200G</li>
+<li>37.5 GHz spacing</li>
+<li>OSNR target: <strong>14–17 dB</strong></li>
+</ul>
+<h3 id="%F0%9F%94%B9-%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87-%E2%80%93-csn">🔹 ตัวอย่าง – CSN</h3>
+<ul>
+<li>บาง segment = 10G NRZ</li>
+<li>50 GHz spacing</li>
+<li>OSNR target ~18–23 dB (NRZ ต้องการสูงกว่า)</li>
+</ul>
+<hr>
+<h2 id="2-gain-equalization--ase-noise">2) Gain Equalization &amp; ASE Noise</h2>
+<h3 id="%F0%9F%8E%AF-%E0%B9%80%E0%B8%9B%E0%B9%89%E0%B8%B2%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2-flat-spectrum">🎯 เป้าหมาย: Flat Spectrum</h3>
+<p>ปัญหาที่พบ:</p>
+<ul>
+<li>EDFA ใต้น้ำมี <strong>gain tilt</strong></li>
+<li>BU / ROADM / NFV เพิ่ม loss</li>
+<li>ASE noise จาก repeater chain เพิ่มตามระยะทาง</li>
+</ul>
+<p>วิธีแก้:</p>
+<ul>
+<li>ใช้ <strong>GFF</strong> (Gain Flattening Filter)</li>
+<li>ปรับ per-channel ด้วย <strong>WSS</strong></li>
+<li>คำนวณ chain budget ให้ OSNR ไม่เกิน threshold ของ modulation</li>
+</ul>
+<hr>
+<h2 id="%E2%9A%A1-ase-noise-amplified-spontaneous-emission">⚡ ASE Noise (Amplified Spontaneous Emission)</h2>
+<ul>
+<li>เกิดใน EDFA ใต้น้ำทุกตัว</li>
+<li>เป็น noise หลักที่ทำให้ OSNR ตก</li>
+<li>ระยะยิ่งไกล → OSNR ยิ่งลดแบบ cumulative</li>
+<li>ต้องวิเคราะห์ร่วมกับ ripple / tilt / nonlinear margin</li>
+</ul>
+<hr>
+<h1 id="c-fault-localization-%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AB%E0%B8%B2%E0%B8%95%E0%B8%B3%E0%B9%81%E0%B8%AB%E0%B8%99%E0%B9%88%E0%B8%87%E0%B8%82%E0%B8%B1%E0%B8%94%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%87">C) Fault Localization (การหาตำแหน่งขัดข้อง)</h1>
+<hr>
+<h2 id="1-otdr-trace-%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%A5%E0%B8%B0%E0%B9%80%E0%B8%AD%E0%B8%B5%E0%B8%A2%E0%B8%94-long-range-subsea-otdr">1) OTDR Trace แบบละเอียด (Long-range Subsea OTDR)</h2>
+<p>สิ่งที่ต้องอ่านให้เป็น:</p>
+<ul>
+<li>Event loss</li>
+<li>Splice loss</li>
+<li>Fiber attenuation</li>
+<li>Reflective events</li>
+<li>Dead zone</li>
+<li>Distance to fault</li>
+</ul>
+<p>อุปกรณ์ที่ใช้ใน Subsea:</p>
+<ul>
+<li>Dynamic range: <strong>40–50 dB</strong></li>
+<li>Narrow pulse laser</li>
+<li>Long-range optimized mode</li>
+</ul>
+<hr>
+<h2 id="2-slm-submarine-line-monitoring">2) SLM (Submarine Line Monitoring)</h2>
+<p>ระบบ Supervisory ใช้ตรวจ:</p>
+<ul>
+<li>Repeater status</li>
+<li>Pump performance</li>
+<li>BU state</li>
+<li>Earth leakage trend</li>
+<li>Aging &amp; margin drift</li>
+<li>Fault trend ก่อน outage</li>
+</ul>
+<p>ทำงานผ่าน:</p>
+<ul>
+<li>Supervisory wavelength (OSC)</li>
+<li>Telemetry กลับเข้า CLS</li>
+</ul>
+<hr>
+<h1 id="%F0%9F%8E%AF-%E0%B8%AA%E0%B8%A3%E0%B8%B8%E0%B8%9B-phase-2">🎯 สรุป Phase 2</h1>
+<p>Phase 2 = ความรู้ระดับปฏิบัติการจริงของระบบ Submarine Cable เช่น:</p>
+<ul>
+<li>การเดินระบบ PFE</li>
+<li>การแยก Fault แบบเบื้องต้นถึงขั้นลึก</li>
+<li>DWDM / OSNR / Equalization</li>
+<li>OTDR / SLM</li>
+<li>Chain budget</li>
+</ul>
+<p>เป็นหัวใจสำคัญของการดูแลระบบ APG, CSN และ International Trunks ทุกเส้นทาง</p>
+<hr>
+
+</body>
+</html>
